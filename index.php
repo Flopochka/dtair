@@ -21,38 +21,32 @@
     <title>DT Air</title>
 </head>
 <body>
-    <?
-    if (isset($_SESSION['login'])) {
-        $query = $con->prepare("SELECT * FROM users WHERE login = ?");
-        $query->execute([validate_input($_SESSION['login'])]);
-        $data = $query->fetch();
-        if (!password_verify($_SESSION['password'], $data['password'])) {
-            $_SESSION = null;
-            session_start();
-            $_SESSION['popup'] = "Ошибочка, войдите в аккаунт снова!";
-            header("location: logout.php");
-            exit;
-        }else{
-            echo '<a href="logout.php">logout</a><form action="userupdate.php" method="post">
-            <input type="text" name="password" placeholder="oldpass">
-            <input type="text" name="newpassword" placeholder="newpass">
-            <input type="text" name="username" placeholder="username" value="'.$data['username'].'">
-            <input type="submit" value="go">
-            </form>';   
-        }
-    } else{
-        echo '<form action="singup.php" method="post">
-        <input type="password" name="password" id="password">
-        <input type="text" name="login" id="login">
-        <input type="submit" value="reg">
-    </form>
-    <form action="login.php" method="post">
-        <input type="password" name="password" id="password">
-        <input type="text" name="login" id="login">
-        <input type="submit" value="log">
-    </form>';
-    }
+    <?php
+    include_once "header.php";
     ?>
-    
+    <main>
+        <section class="ticket_section">
+            <div class="container ticket_container">
+                <h1>Удобный поиск авиабилетов</h1>
+                <form action="" class="ticket_form">
+                    <div class="row"><input type="submit" value="Поиск билетов"></div>
+                    <div class="row">
+                        <label class="label-gliding">
+                            <input type="text" class="input-gliding ticket_input" placeholder="Откуда">
+                        </label>
+                        <label class="label-gliding">
+                            <input type="text" class="input-gliding ticket_input" placeholder="Куда">
+                        </label>
+                        <label class="label-gliding">
+                            <input type="text" class="input-gliding ticket_input" placeholder="Когда">
+                        </label>
+                        <label class="label-gliding">
+                            <input type="text" class="input-gliding ticket_input" placeholder="Обратно">
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
