@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 31 2024 г., 13:23
+-- Время создания: Май 31 2024 г., 15:12
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -120,10 +120,10 @@ CREATE TABLE `users` (
   `id` int NOT NULL,
   `login` text NOT NULL,
   `password` text NOT NULL,
-  `reg_date` timestamp NOT NULL,
-  `last_seens` datetime NOT NULL,
-  `profile_pic` text NOT NULL,
-  `username` text NOT NULL
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_seens` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `profile_pic` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `username` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
