@@ -12,7 +12,13 @@
 <body>
     <?
     if (isset($session_temp['login'])) {
-        echo '<a href="logout.php">logout</a>';
+        
+        echo '<a href="logout.php">logout</a><form action="userupdate.php">
+        <input type="text" name="password" placeholder="oldpass">
+        <input type="text" name="newpassword" placeholder="newpass">
+        <input type="text" name="username" placeholder="username" value="">
+        <input type="submit" value="go">
+    </form>';
     } else{
         echo '<form action="singup.php" method="post">
         <input type="password" name="password" id="password">

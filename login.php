@@ -8,12 +8,14 @@ if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
     $query->execute([$login]);
     $data = $query->fetch();
     if ($data && password_verify($password, $data['password'])) {
+        $query = $con->prepare("UPDATE users SET `last_seens` = ?");
+        $query->execute([date('Y-m-d H:i:s', time())]);
+        var_dump(date('Y-m-d h:i:s', time()));
         $_SESSION['login'] = $login;
         $_SESSION['password'] = password_hash($password, PASSWORD_DEFAULT);
     } else {
         $_SESSION['popup'] = "Неверный логин или пароль";
     }
-    var_dump($_SESSION);
 }else{
     $_SESSION['popup'] = "Упс, тебе сюда нельзя!";
 }
