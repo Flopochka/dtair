@@ -2,5 +2,5 @@
 include_once "db.php";
 $sql = file_get_contents("dtair.sql");
 $con->exec($sql);
-header("Location:index.php");
+header("Location:logout.php");
 exit;

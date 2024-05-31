@@ -6,7 +6,6 @@ if (isset($_SESSION['rand'])) {
 } else {
     $_SESSION['rand'] = 'abobus';
 }
-$session_temp = $_SESSION;
 function validate_input($text) {
     return htmlspecialchars(trim($text));
 }

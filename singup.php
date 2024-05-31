@@ -14,8 +14,8 @@ if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
         echo "Данный логин уже используется, попробуйте другой";
     }else{
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $query = $con->prepare("INSERT INTO users (login, password) VALUES (?, ?)");
-        $query->execute([$login, $hashed_password]);
+        $query = $con->prepare("INSERT INTO users (login, password, username) VALUES (?, ?, ?)");
+        $query->execute([$login, $hashed_password, $login]);
         $_SESSION['popup'] = 'Успешная регистрация!';
         echo "Успешная регистрация!";
     }
