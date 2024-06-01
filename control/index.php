@@ -6,8 +6,37 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="generateflights.php">Сгенерировать 1000 тикетов</a> <br>
-    <a href="cleardb.php">Очистить бд</a> <br>
-    <a href="restartdb.php">Пересоздать бд (очистка + генерация)</a> <br>
+    <div class="box">
+        <a href="generateflights.php">Сгенерировать 2000 тикетов</a>
+        <a href="cleardb.php">Очистить бд</a>
+        <a href="restartdb.php">Пересоздать бд</a>
+    </div>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .box{
+            display: flex;
+            height: 100vh;
+            align-items: stretch;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+            margin: 0 auto;
+            max-width: max-content;
+        }
+        a{
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-decoration: none;
+            color: white;
+            background: black;
+            text-align: center;
+        }
+    </style>
 </body>
 </html>
