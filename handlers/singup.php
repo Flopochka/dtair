@@ -9,7 +9,7 @@ if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
     $data = $query->fetch();
     session_start();
 
-    if (isset($data['id'])) {
+    if (isset($data['id'])||($login==""||$password=="")) {
         $_SESSION['popup'] = 'Данный логин уже используется, попробуйте другой';
         echo "Данный логин уже используется, попробуйте другой";
     }else{

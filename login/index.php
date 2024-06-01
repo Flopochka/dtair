@@ -1,6 +1,5 @@
 <?
 include_once "../handlers/db.php";
-var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="ru">

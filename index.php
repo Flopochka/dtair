@@ -1,7 +1,5 @@
 <?
 include_once "handlers/db.php";
-session_start();
-$_SESSION['popup'] = "щкебеде до доп доп ес ес";
 if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
     echo '<div class="popup">'.$_SESSION['popup'].'<div class="popup-close"></div></div>';
     session_start();
@@ -200,5 +198,6 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
             </nav>
         </div>
     </footer>
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -356,6 +356,34 @@ footer .nav-link:hover{
     align-items: center;
     gap: var(--space5);
 }
+.popup {
+    position: absolute;
+    padding: var(--space5);
+    border: 1px solid #333;
+    border-radius: var(--rad3);
+    top: -100vh;
+    max-width: 300px;
+    background: #f8f8f8;
+    box-shadow: 0 0 var(--rad3) rgba(0, 0, 0, 0.473);
+    animation: pop 5s;
+}
+.popup-close {
+    position: absolute;
+}
+@keyframes pop {
+    0%{
+        top: -100vh;
+    }
+    10%{
+        top: calc(var(--rad3)*2);
+    }
+    90%{
+        top: calc(var(--rad3)*2);
+    }
+    100%{
+        top: -100vh;
+    }
+}
 @media (max-width:1440px) {
     :root{
         --font1: 10px;
