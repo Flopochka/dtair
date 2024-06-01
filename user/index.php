@@ -73,7 +73,54 @@ include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
         <section class="section user_section">
             <div class="container user_container">
                 <h1>Избранное</h1>
-                
+                <?php
+                // Предполагается, что у вас уже установлено соединение с базой данных $con и идентификатор пользователя доступен в $_SESSION['user_id']
+
+                // Получаем идентификатор пользователя
+                $user_id = $data['id'];
+
+                // Получаем все лайкнутые пользователем места
+                $query = $con->prepare("SELECT p.* FROM places p INNER JOIN favorite_places fp ON p.id = fp.place_id WHERE fp.user_id = ?");
+                $query->execute([$user_id]);
+                $favorite_places = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                echo '<div class="places_box">';
+                // Выводим каждое место
+                foreach ($favorite_places as $place) {
+                    echo '<div class="place-card">
+                            <img src="../'.$place['img'].'" alt="" class="place-img">
+                            <div class="place-info">
+                                <h3 class="place-title">'.$place['title'].'</h3>
+                                <p class="place-text">'.$place['subtitle'].'</p>
+                                <button class="place-btn">В избранное</button>
+                                <input type="text" hidden value="'.$place['id'].'" class="hdndata">
+                            </div>
+                        </div>';
+                }
+                echo '</div>';
+
+                // Получаем все лайкнутые пользователем достопримечательности
+                $query = $con->prepare("SELECT d.* FROM destinations d INNER JOIN favorite_locations fl ON d.id = fl.destination_id WHERE fl.user_id = ?");
+                $query->execute([$user_id]);
+                $favorite_destinations = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                echo '<div class="destinations_box">';
+                // Выводим каждую достопримечательность
+                foreach ($favorite_destinations as $destination) {
+                    echo '<div class="destination-card" style="background-image:url(../'.$destination["img"].')">
+                            <div class="destination-shadow"></div>
+                            <div class="destination-info">
+                                <h3 class="destination-title">'.$destination["title"].'</h3>
+                                <p class="destination-text">В '.$destination["title"].' и обратно</p>
+                                <p class="destination-price">от '.$destination["price"].'р</p>
+                                <a href="?destination='.$destination["id"].'" class="destination-btn">Подробнее</a>
+                            </div>
+                            <img src="../img/non-favorite.svg" alt="" class="destination-favorite">
+                            <input type="text" hidden value="'.$destination["id"].'" class="hdndata">
+                        </div>';
+                }
+                echo "</div>";
+                ?>
             </div>
         </section>
     </main>
