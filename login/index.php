@@ -7,7 +7,7 @@ include_once "../db.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход в личный кабинет - DT Airlines</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <div class="wrapper">
@@ -24,7 +24,7 @@ include_once "../db.php";
         <main>
             <div class="login-container">
                 <h2>Вход в личный кабинет</h2>
-                <form action="#" method="POST">
+                <form action="../handlers/login.php" method="POST">
                     <div class="form-group">
                         <label for="login">Введите ваш телефон, логин или e-mail</label>
                         <input type="text" id="login" name="login" placeholder="Телефон/e-mail/логин" required>
