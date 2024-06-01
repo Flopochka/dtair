@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 01 2024 г., 11:54
+-- Время создания: Июн 01 2024 г., 12:23
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -48,6 +48,18 @@ INSERT INTO `destinations` (`id`, `title`, `img`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `favorite_flights`
+--
+
+CREATE TABLE `favorite_flights` (
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `flight_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `favorite_locations`
 --
 
@@ -57,17 +69,14 @@ CREATE TABLE `favorite_locations` (
   `destination_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- --------------------------------------------------------
-
 --
--- Структура таблицы `favorite_flights`
+-- Дамп данных таблицы `favorite_locations`
 --
 
-CREATE TABLE `favorite_flights` (
-  `id` int NOT NULL,
-  `user_id` int DEFAULT NULL,
-  `flight_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO `favorite_locations` (`id`, `user_id`, `destination_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -137,20 +146,20 @@ ALTER TABLE `destinations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `favorite_locations`
---
-ALTER TABLE `favorite_locations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `destination_id` (`destination_id`);
-
---
 -- Индексы таблицы `favorite_flights`
 --
 ALTER TABLE `favorite_flights`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `flight_id` (`flight_id`);
+
+--
+-- Индексы таблицы `favorite_locations`
+--
+ALTER TABLE `favorite_locations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `destination_id` (`destination_id`);
 
 --
 -- Индексы таблицы `flights`
@@ -184,13 +193,7 @@ ALTER TABLE `destinations`
 -- AUTO_INCREMENT для таблицы `favorite_locations`
 --
 ALTER TABLE `favorite_locations`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `favorite_flights`
---
-ALTER TABLE `favorite_flights`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `flights`
@@ -215,19 +218,18 @@ ALTER TABLE `users`
 --
 
 --
--- Ограничения внешнего ключа таблицы `favorite_locations`
---
-ALTER TABLE `favorite_locations`
-  ADD CONSTRAINT `favorite_locations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `favorite_locations_ibfk_2` FOREIGN KEY (`destination_id`) REFERENCES `destinations` (`id`);
-
---
 -- Ограничения внешнего ключа таблицы `favorite_flights`
 --
 ALTER TABLE `favorite_flights`
   ADD CONSTRAINT `favorite_flights_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `favorite_flights_ibfk_2` FOREIGN KEY (`flight_id`) REFERENCES `flights` (`id`);
 
+--
+-- Ограничения внешнего ключа таблицы `favorite_locations`
+--
+ALTER TABLE `favorite_locations`
+  ADD CONSTRAINT `favorite_locations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `favorite_locations_ibfk_2` FOREIGN KEY (`destination_id`) REFERENCES `destinations` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
