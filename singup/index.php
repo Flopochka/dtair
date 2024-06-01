@@ -1,23 +1,20 @@
 <?
 include_once "../handlers/db.php";
-if (isset($_SESSION['login'])&&isset($_SESSION['password'])) {
-    header("location: index.php");
-    exit;
-}
+var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DT Air - дешёвые авиабилеты</title>
+    <title>DT Air - регистрация</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
         <div class="section header_section">
            <div class="container header_container">
-                <a href="index.html" class="link logo_link">
+                <a href="../" class="link logo_link">
                     <img src="" alt="Логотип">
                 </a>
                 <nav class="header_nav">
@@ -45,20 +42,13 @@ if (isset($_SESSION['login'])&&isset($_SESSION['password'])) {
         </div>
     </header>
     <main>
-        <section class="section search_section">
-            <div class="container search_container">
+        <section class="section reg_section">
+            <div class="container reg_container">
                 <h1>Регистрация</h1>
-                <form action="" class="search_form">
-                    <div class="search_box">
-                        <label class="form-label"><input type="text" list="destanations" class="form-input" placeholder="Откуда"></label>
-                        <label class="form-label"><input type="text" list="destanations" class="form-input" placeholder="Куда"></label>
-                        <label class="form-label"><input type="date" class="form-input" placeholder="Когда"></label>
-                        <label class="form-label"><input type="date" class="form-input" placeholder="Обратно"></label>
-                    </div>
-                    <input class="form-butn" type="submit" value="Найти">
-                    <datalist id="destanations">
-                        <option value="Chrome">
-                    </datalist>
+                <form action="../handlers/singup.php" class="reg_form" method="POST">
+                    <label class="form-label"><input type="text" name="login" class="form-input" placeholder="Логин"></label>
+                    <label class="form-label"><input type="password" name="password" class="form-input" placeholder="Пароль"></label>
+                    <input class="form-butn" type="submit" value="Зарегестрироватся">
                 </form>
             </div>
         </section>

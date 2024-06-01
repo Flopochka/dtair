@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 01 2024 г., 13:34
+-- Время создания: Июн 01 2024 г., 19:42
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -30,20 +30,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `destinations` (
   `id` int NOT NULL,
   `title` text NOT NULL,
-  `img` text NOT NULL
+  `img` text NOT NULL,
+  `price` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `destinations`
 --
 
-INSERT INTO `destinations` (`id`, `title`, `img`) VALUES
-(1, 'Mumbai', ''),
-(2, 'Bangalore', ''),
-(3, 'Chennai', ''),
-(4, 'Kolkata', ''),
-(5, 'Delhi', ''),
-(6, 'Hyderabad', '');
+INSERT INTO `destinations` (`id`, `title`, `img`, `price`) VALUES
+(1, 'Mumbai', 'img/destinations/mumbai.png', 1500),
+(2, 'Bangalore', 'img/destinations/bangalore.png', 1700),
+(3, 'Chennai', 'img/destinations/chennai.png', 1560),
+(4, 'Kolkata', 'img/destinations/kolkata.png', 1670),
+(5, 'Delhi', 'img/destinations/delhi.png', 1100),
+(6, 'Hyderabad', 'img/destinations/hyderad.png', 1234);
 
 -- --------------------------------------------------------
 

@@ -66,9 +66,11 @@ body{
     flex-direction: column;
     background: #f8f8f8;
     color: #333;
+    overflow-x: hidden;
 }
 header,main,footer{
     width: 100%;
+    overflow-x: hidden;
 }
 header{
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.384);
@@ -77,11 +79,11 @@ footer{
     background: black;
 }
 .section {
-    padding: 30px 60px;
+    padding: var(--space5) var(--space8);
     width: 100%;
 }
 .header_section {
-    padding: 20px 60px;
+    padding: var(--space3) var(--space8);
 }
 .container{
 
@@ -98,7 +100,7 @@ footer{
 }
 .header_nav {
     display: flex;
-    gap: 20px;
+    gap: var(--space3);
     align-items: center;
 }
 .nav-link {
@@ -106,8 +108,8 @@ footer{
 .nav-btn {
     width: fit-content;
     justify-self: center;
-    padding: 15px 35px;
-    border-radius: 5px;
+    padding: var(--space2) var(--space5);
+    border-radius: var(--rad1);
     background: black;
     color: white;
     border: 2px solid white;
@@ -121,8 +123,8 @@ footer{
     filter: invert(100%);
 }
 .user-ico {
-    width: 75px;
-    height: 75px;
+    width: var(--space8);
+    height: var(--space8);
     border-radius: 50%;
     display: block;
     border: 1px solid #333;
@@ -137,12 +139,12 @@ footer{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: var(--space5);
 }
 .search_box{
     display: grid;
     width: 100%;
-    gap: 30px;
+    gap: var(--space5);
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 .form-label {
@@ -153,8 +155,8 @@ footer{
 }
 .form-input {
     width: 100%;
-    padding: 15px;
-    border-radius: 5px;
+    padding: var(--space2);
+    border-radius: var(--rad1);
     background: none;
     border: 1px solid #333;
     outline: none;
@@ -175,8 +177,8 @@ footer{
     transform: scale(1);
 }
 .form-butn {
-    padding: 15px 35px;
-    border-radius: 5px;
+    padding: var(--space2) var(--space5);
+    border-radius: var(--rad1);
     background: black;
     color: white;
     border: 2px solid white;
@@ -197,36 +199,39 @@ footer{
 .destinations_box {
     width: 100%;
     display: grid;
-    gap: 30px;
+    gap: var(--space5);
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
 .destination-card {
     width: 100%;
     display: grid;
     grid-template-rows: 1fr 2fr;
-    background: coral;
-    border-radius: 5px;
+    background: #333;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: var(--rad1);
     position: relative;
     border: 1px solid #333;
 }
 .destination-shadow {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-top-left-radius: var(--rad1);
+    border-top-right-radius: var(--rad1);
     background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(255, 255, 255, 0.75) 100%);
 }
 .destination-info {
     background: rgba(255, 255, 255, 0.75);
     width: 100%;
-    padding: 30px;
+    padding: var(--space5);
     display: grid;
     grid-template-rows: 1fr 1fr auto 1fr;
     grid-template-columns: 1fr;
     color: #333;
     text-align: start;
     justify-content: start;
-    gap: 15px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    gap: var(--space2);
+    border-bottom-left-radius: var(--rad1);
+    border-bottom-right-radius: var(--rad1);
 }
 .destination-title {
 }
@@ -240,8 +245,8 @@ footer{
 .destination-btn {
     width: fit-content;
     justify-self: center;
-    padding: 15px 35px;
-    border-radius: 5px;
+    padding: var(--space2) var(--space5);
+    border-radius: var(--rad1);
     background: none;
     color: #333;
     border: 2px solid #333;
@@ -255,10 +260,10 @@ footer{
 }
 .destination-favorite {
     position: absolute;
-    width: 45px;
-    height: 45px;
-    top: 10px;
-    right: 10px;
+    width: var(--space7);
+    height: var(--space7);
+    top: var(--space1);
+    right: var(--space1);
     object-fit: contain;
 }
 .places_section {
@@ -267,24 +272,24 @@ footer{
 }
 .places_box {
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
 }
 .place-card {
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
-    gap: 30px;
+    gap: var(--space5);
 }
 .place-card:nth-child(2n){
     flex-direction: row-reverse;
 }
 .place-img {
     width: 50%;
-    padding: 30px;
+    padding: var(--space5);
 }
 .place-info {
-    padding: 60px 0px;
+    padding: var(--space8) 0px;
     width: 50%;
     display: grid;
     grid-template-columns: 1fr;
@@ -298,8 +303,8 @@ footer{
 .place-btn {
     width: fit-content;
     justify-self: center;
-    padding: 15px 35px;
-    border-radius: 5px;
+    padding: var(--space2) var(--space5);
+    border-radius: var(--rad1);
     background: black;
     color: white;
     border: 2px solid white;
@@ -317,11 +322,11 @@ footer{
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    gap: 30px;
+    gap: var(--space5);
 }
 .footer_nav {
     display: flex;
-    gap: 20px;
+    gap: var(--space3);
 }
 footer .nav-link{
     color: white;
@@ -333,81 +338,108 @@ footer .nav-link:hover{
 .footer_contacts {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--space3);
 }
 .footer-title {
 }
 .footer-text {
-    font-size: 14px;
+    font-size: var(--font2);
     color: white;
 }
-
+.reg_form .form-label, .reg_form .form-input{
+    width: fit-content;
+}
+.reg_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space5);
+}
 @media (max-width:1440px) {
-    h1{
-        font-size: var(--font9);
-        text-align: center;
-        margin-bottom: 48px;
+    :root{
+        --font1: 10px;
+        --font2: 12px;
+        --font3: 14px;
+        --font4: 16px;
+        --font5: 18px;
+        --font6: 20px;
+        --font7: 24px;
+        --font8: 30px;
+        --font9: 36px;
+        --font10: 48px;
     }
-    h2{
-        font-size: var(--font8);
-        margin-bottom: 48px;
-    }
-    h3{
-        font-size: var(--font7);
-    }
-    h4{
-        font-size: var(--font6);
-    }
-    h5{
-        font-size: var(--font5);
-    }
-    h6, p, a{
-        font-size: var(--font4);
+    .search_box{
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
     }
 }
 @media (max-width:768px) {
-    h1{
-        font-size: var(--font8);
-        text-align: center;
-        margin-bottom: 48px;
+    :root{
+        --font1: 8px;
+        --font2: 10px;
+        --font3: 12px;
+        --font4: 14px;
+        --font5: 16px;
+        --font6: 18px;
+        --font7: 20px;
+        --font8: 24px;
+        --font9: 30px;
+        --font10: 36px;
+    
+        --space1: 5px;
+        --space2: 10px;
+        --space3: 15px;
+        --space4: 20px;
+        --space5: 25px;
+        --space6: 30px;
+        --space7: 40px;
+        --space8: 50px;
+        --space9: 60px;
     }
-    h2{
-        font-size: var(--font7);
-        margin-bottom: 48px;
+    .search_box{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
     }
-    h3{
-        font-size: var(--font6);
+    .destinations_box {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
-    h4{
-        font-size: var(--font5);
+    .place-card {
+        flex-direction: column;
     }
-    h5{
-        font-size: var(--font4);
+    .place-card:nth-child(2n){
+        flex-direction: column;
     }
-    h6, p, a{
-        font-size: var(--font3);
+    .place-img, .place-info {
+        width: 100%;
+    }
+    .place-btn {
+        justify-self: end;
+    }
+    .footer_section, .footer_nav {
+        flex-wrap: wrap;
     }
 }
 @media (max-width:320px) {
-    h1{
-        font-size: var(--font7);
-        text-align: center;
-        margin-bottom: 48px;
-    }
-    h2{
-        font-size: var(--font6);
-        margin-bottom: 48px;
-    }
-    h3{
-        font-size: var(--font5);
-    }
-    h4{
-        font-size: var(--font4);
-    }
-    h5{
-        font-size: var(--font3);
-    }
-    h6, p, a{
-        font-size: var(--font2);
+    :root{
+        --font1: 6px;
+        --font2: 8px;
+        --font3: 10px;
+        --font4: 12px;
+        --font5: 14px;
+        --font6: 16px;
+        --font7: 18px;
+        --font8: 20px;
+        --font9: 24px;
+        --font10: 30px;
+    
+        --space1: 2px;
+        --space2: 5px;
+        --space3: 10px;
+        --space4: 15px;
+        --space5: 20px;
+        --space6: 25px;
+        --space7: 30px;
+        --space8: 40px;
+        --space9: 50px;
     }
 }

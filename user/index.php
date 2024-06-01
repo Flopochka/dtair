@@ -1,27 +1,20 @@
 <?
-include_once "handlers/db.php";
-session_start();
-$_SESSION['popup'] = "щкебеде до доп доп ес ес";
-if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
-    echo '<div class="popup">'.$_SESSION['popup'].'<div class="popup-close"></div></div>';
-    session_start();
-    $_SESSION['popup'] = null;
-    session_write_close();
-}
+include_once "../handlers/db.php";
+var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DT Air - дешёвые авиабилеты</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>DT Air - личный кабинет</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
         <div class="section header_section">
            <div class="container header_container">
-                <a href="index.html" class="link logo_link">
+                <a href="../" class="link logo_link">
                     <img src="" alt="Логотип">
                 </a>
                 <nav class="header_nav">
@@ -40,7 +33,7 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
                             header("location: logout.php");
                             exit;
                         }else{
-                            echo '<a href="user/" class="link nav-link"><img class="user-ico" src="" alt="Профиль пользователя"></a>';  
+                            echo '<a href="" class="link nav-link"><img class="user-ico" src="" alt="Профиль пользователя"></a>';  
                         }
                     }
                     ?>

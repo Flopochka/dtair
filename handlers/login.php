@@ -18,5 +18,5 @@ if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
 }else{
     $_SESSION['popup'] = "Упс, тебе сюда нельзя!";
 }
-header("location: index.php");
+header("location: ../");
 exit;
