@@ -81,7 +81,7 @@ header {
 .header-container nav a {
     margin-right: 1rem;
     text-decoration: none;
-    color: #000;
+    
 }
 
 .sign-up-button {
@@ -323,13 +323,13 @@ h2 {
     border-radius: 5px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
-
-.popular-routes, .popular-places {
+/* блок с популярынми рейсами */
+.popular-routes {
     width: 100%;
     text-align: center;
 }
 
-.routes-grid, .places-grid {
+.routes-grid {
     display: flex;
     gap: 2rem;
     margin-top: 2rem;
@@ -337,26 +337,30 @@ h2 {
     flex-wrap: nowrap;
     justify-content: flex-start;
 }
-
-.route-card, .place-card {
+.route-card {
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.route-card img, .place-card img {
+.route-card img {
     width: 100%;
-    height: 200px;
+    
     object-fit: cover;
 }
+.h3-info{
 
+}
 .route-info, .place-info {
     padding: 1rem;
     text-align: left;
 }
 
 .details-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--button-bg-color);
     color: var(--button-text-color);
     padding: 0.5rem 1rem;
@@ -364,16 +368,91 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
+    max-width: 175px;
+    width: 100%;
+    height: 35px;
+    margin-top: 10px;
 }
 
-.search-button:hover, .details-button:hover {
+.search-button:hover, .details-button:hover{
     background-color: var(--button-hover-bg-color);
     transform: scale(1.05);
 }
 
-.search-filters input:focus, .route-card:hover, .place-card:hover {
+.search-filters input:focus, .route-card:hover{
     transform: scale(1.05);
     box-shadow: 0 0 10px var(--box-shadow-color);
+}
+/*  популярные места*/
+.popular-title{
+    padding-top: 92px;
+    font-family: var(--font-family);
+font-weight: 700;
+font-size: 48px;
+letter-spacing: -0.02em;
+text-align: center;
+color: #000;
+}
+.places-grid{
+    display: flex;
+    flex-direction: column;    
+}
+.place-card{
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;  
+    margin-bottom: 121px; 
+    padding-top: 69px;
+}
+.place-card__img{
+    display: flex;
+    order:2;
+    border-radius: 10px;
+max-width: 619px;
+width: 100%;
+
+}
+.place-card__img-two{
+    display: flex;
+    order:1;
+    border-radius: 10px;
+max-width: 619px;
+width: 100%;
+
+}
+.place-card__img-three{
+    display: flex;
+    order:2;
+    border-radius: 10px;
+max-width: 619px;
+width: 100%;
+
+
+}
+.place-info{
+    display: flex;
+    flex-direction: column;
+    order: 1;
+    margin-top: 100px;
+}
+.places-grid__title{
+    font-family: var(--font-family);
+font-weight: 600;
+font-size: 36px;
+line-height: 110%;
+color: #000;
+margin-bottom: 24px;
+}
+.places-grid__text{
+    font-family: var(--font-family);
+font-weight: 400;
+font-size: 24px;
+line-height: 150%;
+color: #828282;
+padding-bottom: 24px;
 }
 
 .contacts {
@@ -452,10 +531,68 @@ footer {
         text-align: center;
         margin-bottom: 10px;
     }
+    .routes-grid, .places-grid {
+        flex-direction: column;
+    }
+    .place-card{
+        flex-direction: column;
+        margin-bottom: 5px;
+    }
+    .place-info{
+        order:2;
+        margin-top: 10px;
+
+    }
+    .place-card__img{
+        order: 1;
+    }
+    .place-card__img-three{
+        order: 1;
+
+    }
+    .places-grid__title{
+    font-size: 24px;
+    margin-bottom: 5px;
+
+    }
+    .places-grid__text{
+        margin-top: 5px;
+        font-size: 14px;
+        margin-bottom: 5px;
+
+    }
+    .details-button{
+        margin-top: 1px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
     header, main, footer {
         padding: 30px;
+    }
+    .routes-grid, .places-grid {
+        flex-direction: column;
+    }
+    .place-card{
+        flex-direction: column;
+    }
+    .place-info{
+        order:2;
+        margin-top: 15px;
+
+    }
+    .place-card__img{
+        order: 1;
+    }
+    .place-card__img-three{
+        order: 1;
+
+    }
+    .places-grid__title{
+        
+
+    }
+    .places-grid__text{
+
     }
 }
