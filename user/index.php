@@ -70,6 +70,12 @@ include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
                 </form>
             </div>
         </section>
+        <section class="section user_section">
+            <div class="container user_container">
+                <h1>Избранное</h1>
+                
+            </div>
+        </section>
     </main>
     <footer>
         <div class="section footer_section">

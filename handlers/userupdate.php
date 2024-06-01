@@ -14,16 +14,14 @@ if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
         $_SESSION = null;
         session_start();
         $_SESSION['popup'] = "Ошибочка, войдите в аккаунт снова!";
-        echo "1";
-        // header("location: logout.php");
-        // exit;
+        header("location: logout.php");
+        exit;
     }else{
         if (isset($password)&&$password!=null) {
             if (!password_verify($_POST['password'], $data['password'])) {
                 $_SESSION['popup'] = "Неверный пароль";
-                echo "2";
-                // header("location: logout.php");
-                // exit;
+                header("location: logout.php");
+                exit;
             }else{
                 $query = $con->prepare("UPDATE users SET `password` = ? WHERE login = ?");
                 $query->execute([password_hash($newpassword, PASSWORD_DEFAULT), validate_input($_SESSION['login'])]);
