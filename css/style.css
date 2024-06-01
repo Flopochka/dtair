@@ -22,6 +22,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /*  плавный скролл */
+    scroll-behavior: smooth;
 }
 
 /* Keyframes */
@@ -89,6 +91,9 @@ header {
     color: var(--button-text-color);
     padding: 0.5rem 1rem;
     border-radius: 5px;
+    text-decoration: none;
+}
+.regist-btn{
     text-decoration: none;
 }
 
@@ -455,10 +460,6 @@ color: #828282;
 padding-bottom: 24px;
 }
 
-.contacts {
-    margin-top: 2rem;
-}
-
 /* Footer */
 footer {
     background-color: var(--footer-bg-color);
@@ -504,7 +505,6 @@ footer {
     .registration-form, .profile-form, .login-form, .profile-section, .hero, .routes-grid, .places-grid {
         padding: 15px;
     }
-
     .form-group {
         margin-bottom: 10px;
     }
