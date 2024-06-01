@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 31 2024 г., 15:12
+-- Время создания: Май 31 2024 г., 23:10
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -24,50 +24,46 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `airline`
---
-
-CREATE TABLE `airline` (
-  `id` int NOT NULL,
-  `name` int NOT NULL,
-  `ch_code` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `airs`
---
-
-CREATE TABLE `airs` (
-  `id` int NOT NULL,
-  `airline_id` int NOT NULL,
-  `destination_id` int NOT NULL,
-  `time_taken` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `destinations`
 --
 
 CREATE TABLE `destinations` (
   `id` int NOT NULL,
-  `name` text NOT NULL,
-  `time` int NOT NULL
+  `title` int NOT NULL,
+  `img` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `favorites`
+-- Структура таблицы `favorite_locations`
 --
 
-CREATE TABLE `favorites` (
+CREATE TABLE `favorite_locations` (
   `id` int NOT NULL,
-  `userid` int NOT NULL,
-  `placeid` int NOT NULL
+  `user_id` int DEFAULT NULL,
+  `destination` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `flights`
+--
+
+CREATE TABLE `flights` (
+  `id` int NOT NULL,
+  `date` date DEFAULT NULL,
+  `airline` varchar(100) DEFAULT NULL,
+  `ch_code` varchar(10) DEFAULT NULL,
+  `num_code` int DEFAULT NULL,
+  `dep_time` time DEFAULT NULL,
+  `departure_destination` int DEFAULT NULL,
+  `time_taken` varchar(20) DEFAULT NULL,
+  `stop` varchar(20) DEFAULT NULL,
+  `arr_time` time DEFAULT NULL,
+  `arrival_destination` int DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -78,36 +74,8 @@ CREATE TABLE `favorites` (
 
 CREATE TABLE `history` (
   `id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `date` datetime NOT NULL,
-  `search` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `places`
---
-
-CREATE TABLE `places` (
-  `id` int NOT NULL,
-  `place` text NOT NULL,
-  `destination_id` int NOT NULL,
-  `info` text NOT NULL,
-  `img` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `routes`
---
-
-CREATE TABLE `routes` (
-  `id` int NOT NULL,
-  `dest_from` int NOT NULL,
-  `dest_to` int NOT NULL,
-  `dep_time` time NOT NULL
+  `userid` int NOT NULL,
+  `query` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -131,45 +99,28 @@ CREATE TABLE `users` (
 --
 
 --
--- Индексы таблицы `airline`
---
-ALTER TABLE `airline`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `airs`
---
-ALTER TABLE `airs`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Индексы таблицы `destinations`
 --
 ALTER TABLE `destinations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `favorites`
+-- Индексы таблицы `favorite_locations`
 --
-ALTER TABLE `favorites`
+ALTER TABLE `favorite_locations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Индексы таблицы `flights`
+--
+ALTER TABLE `flights`
   ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `history`
 --
 ALTER TABLE `history`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `places`
---
-ALTER TABLE `places`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `routes`
---
-ALTER TABLE `routes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -183,27 +134,21 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT для таблицы `airline`
---
-ALTER TABLE `airline`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `airs`
---
-ALTER TABLE `airs`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT для таблицы `destinations`
 --
 ALTER TABLE `destinations`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `favorites`
+-- AUTO_INCREMENT для таблицы `favorite_locations`
 --
-ALTER TABLE `favorites`
+ALTER TABLE `favorite_locations`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `flights`
+--
+ALTER TABLE `flights`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -213,22 +158,20 @@ ALTER TABLE `history`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `places`
---
-ALTER TABLE `places`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `routes`
---
-ALTER TABLE `routes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `favorite_locations`
+--
+ALTER TABLE `favorite_locations`
+  ADD CONSTRAINT `favorite_locations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
