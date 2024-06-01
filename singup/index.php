@@ -8,18 +8,19 @@ include_once "../handlers/db.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DT Air - регистрация</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../img/plane.svg" type="image/x-icon">
 </head>
 <body>
     <header>
         <div class="section header_section">
            <div class="container header_container">
                 <a href="../" class="link logo_link">
-                    <img src="" alt="Логотип">
+                <img class="logo" src="../img/plane.svg" alt="Логотип">
                 </a>
                 <nav class="header_nav">
                     <?
                     if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
-                        echo '<a href="login/" class="link nav-link">Войти</a>
+                        echo '<a href="../login/" class="link nav-link">Войти</a>
                         <a href="" class="link nav-btn">Зарегестироватся</a>';
                     } else{
                         $query = $con->prepare("SELECT * FROM users WHERE login = ?");

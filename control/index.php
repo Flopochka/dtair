@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Панель управения базой данных</title>
+    <link rel="shortcut icon" href="../img/plane.svg" type="image/x-icon">
 </head>
 <body>
     <div class="box">

@@ -14,28 +14,38 @@ if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
         $_SESSION = null;
         session_start();
         $_SESSION['popup'] = "Ошибочка, войдите в аккаунт снова!";
-        header("location: logout.php");
-        exit;
+        echo "1";
+        // header("location: logout.php");
+        // exit;
     }else{
         if (isset($password)&&$password!=null) {
             if (!password_verify($_POST['password'], $data['password'])) {
                 $_SESSION['popup'] = "Неверный пароль";
-                header("location: logout.php");
-                exit;
+                echo "2";
+                // header("location: logout.php");
+                // exit;
             }else{
                 $query = $con->prepare("UPDATE users SET `password` = ? WHERE login = ?");
                 $query->execute([password_hash($newpassword, PASSWORD_DEFAULT), validate_input($_SESSION['login'])]);
+                session_start();
+                $_SESSION['password'] = $newpassword;
             }
         }
-        $query = $con->prepare("UPDATE users SET  `username` = ? WHERE login = ?");
-        $query->execute([$username, validate_input($_SESSION['login'])]);     
-        if (isset($_FILES['file'])) {
-            $uploadFile = "img/profile/useravatars/" . basename($_FILES['file']['name']);
+        if ($username != null) {
+            $query = $con->prepare("UPDATE users SET  `username` = ? WHERE login = ?");
+            $query->execute([$username, validate_input($_SESSION['login'])]);  
+        }   
+        if (isset($_FILES['file'])&&$_FILES['file']['tmp_name']!=null) {
+            $uploadDir = 'img/profile/useravatars/';
+            if (!is_dir('../'.$uploadDir)) {
+                mkdir('../'.$uploadDir, 0777, true);
+            }
+            $uploadFile = $uploadDir . basename($_FILES['file']['name']);
             move_uploaded_file($_FILES['file']['tmp_name'], '../'.$uploadFile);
             $query = $con->prepare("UPDATE users SET `profile_pic` = ? WHERE login = ?");
             $query->execute([$uploadFile, validate_input($_SESSION['login'])]);
         }
     }
 }
-// header("location: ../");
-// exit;
+header("location: ../");
+exit;

@@ -12,15 +12,17 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="дешёвые авиабилеты">
     <title>DT Air - дешёвые авиабилеты</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/plane.svg" type="image/x-icon">
 </head>
 <body>
     <header>
         <div class="section header_section">
            <div class="container header_container">
-                <a href="index.html" class="link logo_link">
-                    <img src="" alt="Логотип">
+                <a href="/" class="link logo_link">
+                    <img class="logo" src="img/plane.svg" alt="Логотип">
                 </a>
                 <nav class="header_nav">
                     <?
@@ -35,7 +37,7 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
                             $_SESSION = null;
                             session_start();
                             $_SESSION['popup'] = "Ошибочка, войдите в аккаунт снова!";
-                            header("location: logout.php");
+                            header("location: handlers/logout.php");
                             exit;
                         }else{
                             echo '<a href="user/" class="link nav-link"><img class="user-ico" src="'.$data['profile_pic'].'" alt="Профиль пользователя"></a>';  
