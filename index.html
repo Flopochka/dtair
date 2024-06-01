@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница - DT Airlines</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <div class="wrapper">
@@ -13,7 +13,7 @@
                 <h1>DT Airlines</h1>
                 <nav>
                     <a href="#">главная</a>
-                    <a href="#" class="sign-up-button">Sign Up</a>
+                    <a href="./html/login.html" class="sign-up-button">Sign Up</a>
                 </nav>
             </div>
         </header>
@@ -25,8 +25,8 @@
                 <div class="search-filters">
                     <input type="text" placeholder="Откуда...">
                     <input type="text" placeholder="Куда...">
-                    <input type="text" placeholder="Когда...">
-                    <input type="text" placeholder="Обратно...">
+                    <input type="datetime-local" placeholder="Когда...">
+                    <input type="datetime-local" placeholder="Обратно...">
                 </div>
             </section>
 
@@ -44,7 +44,7 @@
                     <div class="route-card">
                         <img src="img/delhi-chenhall.png" alt="Bangalore - Chennai">
                         <div class="route-info">
-                            <h3>Bangalore - Chennai</h3>
+                            <h3 class="h3-info">Bangalore - Chennai</h3>
                             <p>Из Bangalore в обратно от 1500 ₽</p>
                             <button class="details-button">Подробнее</button>
                         </div>
@@ -70,7 +70,10 @@
                         <div class="route-info">
                             <h3>Delhi - Chennai</h3>
                             <p>Из Delhi в обратно от 1500 ₽</p>
-                            <button class="details-button">Подробнее</button>
+                            <div class="status" id="js-status">
+                                <button class="details-button">Подробнее</button>
+                                <!-- <button class="statusPhoto" id="js-status-btn"></button> -->
+                            </div>
                         </div>
                     </div>
                     <div class="route-card">
@@ -85,31 +88,31 @@
             </section>
 
             <section class="popular-places">
-                <h2>Популярные места</h2>
+                <h2 class="popular-title">Популярные места</h2>
                 <div class="places-grid">
                     <div class="place-card">
-                        <img src="img/img.png" alt="Mumbai">
                         <div class="place-info">
-                            <h3>Mumbai</h3>
-                            <p>Самый западный, многонациональный и крупный город Индии</p>
+                            <h3 class="places-grid__title">Mumbai</h3>
+                            <p class="places-grid__text">Самый западный, многонациональный и крупный город Индии</p>
+                            <button class="details-button">Подробнее</button>
+                        </div>
+                        <img src="img/img.png" alt="Mumbai" class="place-card__img">
+                    </div>
+                    <div class="place-card">
+                        <img src="img/delhi3.png" alt="Delhi" class="place-card__img-two">
+                        <div class="place-info">
+                            <h3 class="places-grid__title">Delhi</h3>
+                            <p class="places-grid__text">Столица Индии и второй по величине город страны</p>
                             <button class="details-button">Подробнее</button>
                         </div>
                     </div>
                     <div class="place-card">
-                        <img src="img/delhi3.png" alt="Delhi">
                         <div class="place-info">
-                            <h3>Delhi</h3>
-                            <p>Столица Индии и второй по величине город страны</p>
+                            <h3 class="places-grid__title">Kolkata</h3>
+                            <p class="places-grid__text">Культурное сердце современной Индии</p>
                             <button class="details-button">Подробнее</button>
                         </div>
-                    </div>
-                    <div class="place-card">
-                        <img src="img/kolkata2.png" alt="Kolkata">
-                        <div class="place-info">
-                            <h3>Kolkata</h3>
-                            <p>Культурное сердце современной Индии</p>
-                            <button class="details-button">Подробнее</button>
-                        </div>
+                        <img src="img/kolkata2.png" alt="Kolkata" class="place-card__img-three">
                     </div>
                 </div>
             </section>
@@ -147,6 +150,7 @@
             </div>
         </footer>
     </div>
+    <script src = "./js/cards.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
