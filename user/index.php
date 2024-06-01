@@ -1,5 +1,5 @@
 <?
-include_once "../handlers/db.php";
+include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -19,8 +19,8 @@ include_once "../handlers/db.php";
                 <nav class="header_nav">
                     <?
                     if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
-                        echo '<a href="login/" class="link nav-link">Войти</a>
-                        <a href="singup/" class="link nav-btn">Зарегестироватся</a>';
+                        echo '<a href="..login/" class="link nav-link">Войти</a>
+                        <a href="..singup/" class="link nav-btn">Зарегестироватся</a>';
                     } else{
                         $query = $con->prepare("SELECT * FROM users WHERE login = ?");
                         $query->execute([validate_input($_SESSION['login'])]);
@@ -32,7 +32,7 @@ include_once "../handlers/db.php";
                             header("location: logout.php");
                             exit;
                         }else{
-                            echo '<a href="" class="link nav-link"><img class="user-ico" src="" alt="Профиль пользователя"></a>';  
+                            echo '<a href="/" class="link nav-link"><img class="user-ico" src="../'.$data['profile_pic'].'" alt="Профиль пользователя"></a>';  
                         }
                     }
                     ?>
@@ -44,10 +44,10 @@ include_once "../handlers/db.php";
         <section class="section user_section">
             <div class="container user_container">
                 <h1>Личный кабинет</h1>
-                <form action="" class="user_form">
+                <form action="../handlers/userupdate.php" class="user_form" method="POST" enctype="multipart/form-data">
                     <div class="user_data">
                         <label for="" class="user-line">
-                            <input type="text" name="username" value="username" placeholder="Ваше имя">
+                            <input type="text" name="username" value="<? echo $data['username']; ?>" placeholder="Ваше имя">
                         </label>
                         <label for="" class="user-line">
                             <p class="user-text">Старый пароль</p>
@@ -59,8 +59,11 @@ include_once "../handlers/db.php";
                         </label>
                     </div>
                     <div class="user_photo">
-                        <img src="" alt="" class="user-pic">
-                        <input type="file">
+                        <img src="<? echo '../'.$data['profile_pic']; ?>" alt="" class="user-pic">
+                        <label class="input-file">
+                            <input type="file" name="file" accept="image/*">		
+                            <span>Выберите фото</span>
+                        </label>
                         <input class="user-btn" type="submit" value="Обновить">
                     </div>
                 </form>

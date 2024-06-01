@@ -29,7 +29,13 @@ if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
         }
         $query = $con->prepare("UPDATE users SET  `username` = ? WHERE login = ?");
         $query->execute([$username, validate_input($_SESSION['login'])]);     
+        if (isset($_FILES['file'])) {
+            $uploadFile = "img/profile/useravatars/" . basename($_FILES['file']['name']);
+            move_uploaded_file($_FILES['file']['tmp_name'], '../'.$uploadFile);
+            $query = $con->prepare("UPDATE users SET `profile_pic` = ? WHERE login = ?");
+            $query->execute([$uploadFile, validate_input($_SESSION['login'])]);
+        }
     }
 }
-header("location: index.php");
-exit;
+// header("location: ../");
+// exit;

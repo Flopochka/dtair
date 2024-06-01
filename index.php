@@ -38,7 +38,7 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
                             header("location: logout.php");
                             exit;
                         }else{
-                            echo '<a href="user/" class="link nav-link"><img class="user-ico" src="" alt="Профиль пользователя"></a>';  
+                            echo '<a href="user/" class="link nav-link"><img class="user-ico" src="'.$data['profile_pic'].'" alt="Профиль пользователя"></a>';  
                         }
                     }
                     ?>
@@ -90,7 +90,7 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
                             <h3 class="destination-title">'.$destination["title"].'</h3>
                             <p class="destination-text">В '.$destination["title"].' и обратно</p>
                             <p class="destination-price">от '.$destination["price"].'р</p>
-                            <button class="destination-btn">Подробнее</button>
+                            <a href="?destination='.$destination["id"].'" class="destination-btn">Подробнее</a>
                         </div>
                         <img src="img/non-favorite.svg" alt="" class="destination-favorite">
                     </div>';
@@ -104,73 +104,54 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
                 <h2>Популярные места</h2>
                 <div class="places_box">
                     <?
-                    $query = $con->prepare("SELECT * FROM favorite_locations");
-                    $query->execute();
-                    $data = $query->fetchAll();
+                    $destination = (int)$_GET['destination'];
+                    if ($destination == null) {
+                        $destination = rand(1, 6);
+                    }
+                    $query = $con->prepare("SELECT * FROM places WHERE destination_id = ?");
+                    $query->execute([$destination]);
+                    $placesData = $query->fetchAll(PDO::FETCH_ASSOC);
+                    
+                    $placeIds = array_column($placesData, 'id');
+                    
+                    $placeholders = implode(',', array_fill(0, count($placeIds), '?'));
+                    
+                    $query = $con->prepare("SELECT * FROM favorite_places WHERE place_id IN ($placeholders)");
+                    $query->execute($placeIds);
+                    $favoritesData = $query->fetchAll(PDO::FETCH_ASSOC);
+                    
                     $favorites = [];
-                    foreach ($data as $row) {
-                        $favorites[$row['destination_id']] = $row['favorites'];
+                    foreach ($favoritesData as $row) {
+                        $favorites[$row['place_id']] = $row['favorites'];
                     }
                     arsort($favorites);
-                    $topDestinations = array_slice(array_keys($favorites), 0, 3, true);
-
-                    $placeholders = implode(',', array_fill(0, count($topDestinations), '?'));
-                    $query = $con->prepare("SELECT * FROM destinations WHERE id IN ($placeholders)");
-                    $query->execute($topDestinations);
-                    $topDestinationsInfo = $query->fetchAll();
-                    foreach ($topDestinationsInfo as $destination) {
-                        echo '<div class="destination-card" style="background-image:url('.$destination["img"].')">
-                        <div class="destination-shadow"></div>
-                        <div class="destination-info">
-                            <h3 class="destination-title">'.$destination["title"].'</h3>
-                            <p class="destination-text">В '.$destination["title"].' и обратно</p>
-                            <p class="destination-price">от '.$destination["price"].'р</p>
-                            <button class="destination-btn">Подробнее</button>
+                    
+                    
+                    // Получение топ-3 мест
+                    $topPlaceIds = array_slice(array_keys($favorites), 0, 3);
+                    
+                    
+                    // Формирование плейсхолдеров для IN-условия для топ-3 мест
+                    $topPlacePlaceholders = implode(',', array_fill(0, count($topPlaceIds), '?'));
+                    
+                    // Запрос информации о топ-3 местах из таблицы places
+                    $query = $con->prepare("SELECT * FROM places WHERE id IN ($topPlacePlaceholders)");
+                    // var_dump($query);
+                    $query->execute($topPlaceIds);
+                    $topPlacesInfo = $query->fetchAll(PDO::FETCH_ASSOC);
+                    
+                    // Вывод информации о топ-3 местах
+                    foreach ($topPlacesInfo as $place) {
+                        echo '<div class="place-card">
+                        <img src="'.$place['img'].'" alt="" class="place-img">
+                        <div class="place-info">
+                        <h3 class="place-title">'.$place['title'].'</h3>
+                        <p class="place-text">'.$place['subtitle'].'</p>
+                        <button class="place-btn">В избранное</button>
                         </div>
-                        <img src="img/non-favorite.svg" alt="" class="destination-favorite">
-                    </div>';
+                        </div>';
                     }
                     ?>
-                    <div class="place-card">
-                        <img src="img/destinations/hyderad.png" alt="" class="place-img">
-                        <div class="place-info">
-                            <h3 class="place-title">Шиваджи Парк</h3>
-                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
-                            <button class="place-btn">В избранное</button>
-                        </div>
-                    </div>
-                    <div class="place-card">
-                        <img src="" alt="" class="place-img">
-                        <div class="place-info">
-                            <h3 class="place-title">Шиваджи Парк</h3>
-                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
-                            <button class="place-btn">В избранное</button>
-                        </div>
-                    </div>
-                    <div class="place-card">
-                        <img src="" alt="" class="place-img">
-                        <div class="place-info">
-                            <h3 class="place-title">Шиваджи Парк</h3>
-                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
-                            <button class="place-btn">В избранное</button>
-                        </div>
-                    </div>
-                    <div class="place-card">
-                        <img src="" alt="" class="place-img">
-                        <div class="place-info">
-                            <h3 class="place-title">Шиваджи Парк</h3>
-                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
-                            <button class="place-btn">В избранное</button>
-                        </div>
-                    </div>
-                    <div class="place-card">
-                        <img src="" alt="" class="place-img">
-                        <div class="place-info">
-                            <h3 class="place-title">Шиваджи Парк</h3>
-                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
-                            <button class="place-btn">В избранное</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
