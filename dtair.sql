@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 31 2024 г., 23:10
+-- Время создания: Июн 01 2024 г., 07:41
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -29,9 +29,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `destinations` (
   `id` int NOT NULL,
-  `title` int NOT NULL,
+  `title` text NOT NULL,
   `img` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `destinations`
+--
+
+INSERT INTO `destinations` (`id`, `title`, `img`) VALUES
+(1, 'Mumbai', ''),
+(2, 'Bangalore', ''),
+(3, 'Chennai', ''),
+(4, 'Kolkata', ''),
+(5, 'Delhi', ''),
+(6, 'Hyderabad', '');
 
 -- --------------------------------------------------------
 
@@ -63,7 +75,8 @@ CREATE TABLE `flights` (
   `stop` varchar(20) DEFAULT NULL,
   `arr_time` time DEFAULT NULL,
   `arrival_destination` int DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL
+  `price` decimal(10,2) DEFAULT NULL,
+  `Type` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -137,7 +150,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `destinations`
 --
 ALTER TABLE `destinations`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `favorite_locations`

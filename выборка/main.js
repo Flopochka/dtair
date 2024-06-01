@@ -1,44 +1,81 @@
-// Функция для чтения файла .csv
-function readCSV(file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const text = e.target.result;
-      const data = parseCSV(text);
-      // Обработка данных и создание SQL-запросов
-      const sqlQueries = createSQLQueries(data);
-      document.body.innerText+=sqlQueries
-    };
-    reader.readAsText(file);
-  }
-  
-  // Функция для парсинга текста .csv в массив объектов
-  function parseCSV(text) {
-    const lines = text.split('\n');
-    const headers = lines[0].split(';').map(header => header.trim());
-    return lines.slice(1).map(line => {
-      const data = line.split(';');
-      const obj = {};
-      headers.forEach((header, index) => {
-        obj[header] = data[index] && data[index].replace(/^"|"$/g, '').trim();
-      });
-      return obj;
+const fs = require('fs');
+
+// Функция для чтения CSV файла и преобразования данных в массив
+function readCSV(filePath) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
     });
-  }
-  
-  // Функция для создания SQL-запросов
-  function createSQLQueries(data) {
-    return data.map(row => {
-      if (!row['num_code'] || !row['airline'] || !row['from'] || !row['to'] || !row['dep_time']) {
-        console.error('Некоторые данные отсутствуют:', row);
-        return ''; // Возвращаем пустую строку для неполных данных
-      }
-      return `INSERT INTO flights (id, num, airline_id, dest_from, dest_to, time) VALUES (NULL, '${row['num_code']}', '${row['airline']}', '${row['from']}', '${row['to']}', '${row['dep_time']}');`;
-    }).filter(Boolean); // Удаляем пустые строки из результатов
-  }
-  
-  // Пример использования
-  const fileInput = document.getElementById('yourFileInput'); // Замените на ваш элемент input
-  fileInput.addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    readCSV(file);
-  });
+}
+
+// Функция для парсинга CSV данных
+function parseCSV(data) {
+    const lines = data.split('\n');
+    const headers = lines[0].split(';');
+    const rows = [];
+    let currentRow = [];
+    let inMultilineField = false;
+
+    for (let i = 1; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (line.includes(';')) {
+            if (inMultilineField) {
+                currentRow[currentRow.length - 1] += ' ' + line.replace(/"/g, '');
+                inMultilineField = false;
+            } else {
+                if (currentRow.length > 0) {
+                    rows.push(currentRow);
+                }
+                currentRow = line.split(';');
+            }
+        } else {
+            currentRow[currentRow.length - 1] += ' ' + line.replace(/"/g, '');
+            inMultilineField = true;
+        }
+    }
+
+    if (currentRow.length > 0) {
+        rows.push(currentRow);
+    }
+
+    return rows.map(row => {
+        return headers.reduce((obj, header, index) => {
+            obj[header.trim()] = row[index] ? row[index].trim() : '';
+            return obj;
+        }, {});
+    });
+}
+
+// Функция для создания SQL запроса
+function createSQLInsertQuery(cities) {
+    const sqlValues = cities.map(city => `('${city.replace(/'/g, "''")}', NULL)`).join(', ');
+    return `INSERT INTO \`destinations\` (\`title\`, \`img\`) VALUES ${sqlValues};`;
+}
+
+// Основная функция
+async function main() {
+    
+        const filePath = 'list.csv';
+        const csvData = await readCSV(filePath);
+        console.log(csvData)
+        const parsedData = parseCSV(csvData);
+        const cities = new Set();
+
+        parsedData.forEach(row => {
+            if (row['from']) cities.add(row['from'].toLowerCase());
+            if (row['to']) cities.add(row['to'].toLowerCase());
+        });
+
+        const sqlQuery = createSQLInsertQuery(Array.from(cities));
+        console.log(sqlQuery);
+    
+}
+
+document.addEventListener('oncontentloaded',()=>{
+  main();
+})
