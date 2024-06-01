@@ -68,28 +68,51 @@ function combineRows($rows) {
 function getFlightData($filename) {
     $rows = file($filename);
     $dataText = '';
+    
+    // Удаляем пустые строки из массива строк
+    $rows = array_filter($rows, function($value){
+        return trim($value) !== '';
+    });
 
-    // Начинаем считывать строки с индекса 1 (вторая строка)
-    for ($i = 1; $i < count($rows); $i += 4) {
-        $dataText .= $rows[$i]; // Добавляем строку в текстовую переменную
+    // Объединяем строки в одну текстовую переменную
+    foreach ($rows as $row) {
+        $dataText .= $row;
     }
-
-    // Разбиваем текст на строки сепаратором "\n\n"
-    $dataLines = explode("\n\n", $dataText);
 
     // Получаем заголовок из первой строки
     $header = str_getcsv($rows[0], ";");
 
-    // Проходим по каждой строке и сепарируем данные сепаратором ";"
+    // Объединяем битые строки
+    $combinedRows = [];
+    $currentRow = '';
+    foreach ($rows as $line) {
+        $line = trim($line);
+        if (!empty($line)) {
+            if (!empty($currentRow)) {
+                $currentRow .= $line;
+            } else {
+                $currentRow = $line;
+            }
+        } else {
+            if (!empty($currentRow)) {
+                $combinedRows[] = $currentRow;
+                $currentRow = '';
+            }
+        }
+    }
+
+    // Преобразуем объединенные строки в ассоциативные массивы
     $data = [];
-    foreach ($dataLines as $line) {
-        $rowData = str_getcsv($line, ";");
-        var_dump($rowData);echo"\n";
-        $data[] = array_combine($header, $rowData);
+    foreach ($combinedRows as $line) {
+        $lineData = str_getcsv($line, ";");
+        if (count($lineData) == count($header)) {
+            $data[] = array_combine($header, $lineData);
+        }
     }
 
     return $data;
 }
+
 
 
 function generateSQL($flight, $type) {
