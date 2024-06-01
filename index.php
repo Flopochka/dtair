@@ -95,7 +95,8 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
                             <a href="?destination='.$destination["id"].'" class="destination-btn">Подробнее</a>
                         </div>
                         <img src="img/non-favorite.svg" alt="" class="destination-favorite">
-                    </div>';
+                        <input type="text" hidden value="'.$destination["id"].'" class="hdndata">
+                        </div>';
                     }
                     ?>
                 </div>
@@ -150,6 +151,7 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
                         <h3 class="place-title">'.$place['title'].'</h3>
                         <p class="place-text">'.$place['subtitle'].'</p>
                         <button class="place-btn">В избранное</button>
+                        <input type="text" hidden value="'.$place['id'].'" class="hdndata">
                         </div>
                         </div>';
                     }
