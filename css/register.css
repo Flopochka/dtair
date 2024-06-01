@@ -172,6 +172,9 @@ footer {
 .footer-column p {
     margin-bottom: 10px;
 }
+.register-button{
+    text-decoration: none;
+}
 
 /* Мобильные устройства (320px) */
 @media (max-width: 767px) {
