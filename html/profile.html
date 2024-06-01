@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация личного кабинета - DT Airlines</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Личный кабинет - DT Airlines</title>
+    <link rel="stylesheet" href="/css/profile.css">
 </head>
 <body>
     <div class="wrapper">
@@ -12,35 +12,75 @@
             <div class="header-container">
                 <h1>DT Airlines</h1>
                 <nav>
+<<<<<<< HEAD
                     <a href="/index.html">главная</a>
                     <a href="/html/login.html" class="sign-up-button">Sign Up</a>
+=======
+                    <a href="#" class="no-sign-button">главная</a>
+                    <a href="#" class="sign-up-button">Sign Up</a>
+>>>>>>> a58467d564cd72750d13a364a3c19a0de50ab64c
                 </nav>
             </div>
         </header>
 
         <main>
-            <div class="registration-container">
-                <h2>Регистрация личного кабинета</h2>
-                <form action="#" method="POST">
-                    <div class="form-group">
-                        <input type="text" id="phone" name="phone" placeholder="📞 Ваш номер телефона" required>
+            <h2>Личный кабинет</h2>
+            <div class="profile-section">
+                <div class="profile-details">
+                    <div class="profile-item">
+                        <label for="email">Адрес электронной почты</label>
+                        <div class="input-container">
+                            <span class="icon">✉️</span>
+                            <input type="email" id="email" value="info@sitename.ru" disabled>
+                            <a href="#" class="edit-link">Изменить</a>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="text" id="login" name="login" placeholder="👤 Ваш логин" required>
+                    <div class="profile-item">
+                        <label for="name">Фамилия и имя</label>
+                        <div class="input-container">
+                            <span class="icon">👤</span>
+                            <input type="text" id="name" value="Иванов Иван" disabled>
+                            <a href="#" class="edit-link">Изменить</a>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="✉️ Ваша почта" required>
+                    <div class="profile-item">
+                        <label for="phone">Номер телефона</label>
+                        <div class="input-container">
+                            <span class="icon">📞</span>
+                            <input type="tel" id="phone" value="+7 (800) 000-00-00" disabled>
+                            <a href="#" class="edit-link">Изменить</a>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="password" id="password" name="password" placeholder="🔒 Пароль" required>
+                    <button class="delete-button">Удалить личный кабинет</button>
+                </div>
+                <div class="profile-picture">
+                    <div class="picture-frame">
+                        <!-- Image placeholder -->
                     </div>
-                    <div class="form-group">
-                        <input type="password" id="password-confirm" name="password-confirm" placeholder="🔒 Введите ещё раз пароль" required>
+                    <a href="#" class="upload-link">Загрузить фото профиля</a>
+                </div>
+            </div>
+            <div class="favorites-section">
+                <h2 class="section-title">Избранное</h2>
+                <div class="favorites-content">
+                    <div class="favorite-item">
+                        <div class="route-info">
+                            <h3>Mumbai - Delhi</h3>
+                            <p>Из Mumbai в обратно от 1500 ₽</p>
+                            <button class="btn details-btn">Подробнее</button>
+                        </div>
+                        <button class="btn remove-favorite-btn">Удалить из избранного</button>
                     </div>
-                    <div class="form-actions">
-                        <button type="submit" class="register-button">Зарегистрироваться</button>
+                    <div class="favorite-item">
+                        <div class="route-info">
+                            <h3>Bangalore - Chennai</h3>
+                            <p>Из Bangalore в обратно от 1500 ₽</p>
+                            <button class="btn details-btn">Подробнее</button>
+                        </div>
+                        <button class="btn remove-favorite-btn">Удалить из избранного</button>
                     </div>
-                </form>
+                    <!-- More favorite items -->
+                </div>
             </div>
         </main>
 
@@ -70,5 +110,6 @@
             </div>
         </footer>
     </div>
+    <script src="/js/main.js"></script>
 </body>
 </html>
