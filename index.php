@@ -1,175 +1,202 @@
-<?php
-    include_once "db.php";
-    $_SESSION['popup'] = null;
-    if (isset($_SESSION['password'])) {
-        $query = $con->prepare("SELECT * FROM users WHERE login = ?");
-        $query->execute([validate_input($_SESSION['login'])]);
-        $data = $query->fetch();
-        if (!password_verify($_SESSION['password'], $data['password'])) {
-            $_SESSION = null;
-            session_start();
-            $_SESSION['popup'] = "Ошибочка, войдите в аккаунт снова!";
-            header("location: logout.php");
-            exit;
-        }
-    }
+<?
+include_once "handlers/db.php";
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная страница - DT Airlines</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>DT Air - дешёвые авиабилеты</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="wrapper">
-        <header>
-            <div class="header-container">
-                <h1>DT Airlines</h1>
-                <nav>
+    <header>
+        <div class="section header_section">
+           <div class="container header_container">
+                <a href="index.html" class="link logo_link">
+                    <img src="" alt="Логотип">
+                </a>
+                <nav class="header_nav">
                     <?
-                        if (isset($_SESSION['login'])) {
-                            echo '<a href="/user/" class="link ico_link">
-                            <img src="" alt="Фото профиля" class="user_ico">
-                        </a>';   
-                        } else{
-                            echo '<a href="login/" class="sign-up-button">Sign Up</a>';
+                    if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
+                        echo '<a href="login/" class="link nav-link">Войти</a>
+                        <a href="singup/" class="link nav-btn">Зарегестироватся</a>';
+                    } else{
+                        $query = $con->prepare("SELECT * FROM users WHERE login = ?");
+                        $query->execute([validate_input($_SESSION['login'])]);
+                        $data = $query->fetch();
+                        if (!password_verify($_SESSION['password'], $data['password'])) {
+                            $_SESSION = null;
+                            session_start();
+                            $_SESSION['popup'] = "Ошибочка, войдите в аккаунт снова!";
+                            header("location: logout.php");
+                            exit;
+                        }else{
+                            echo '<a href="" class="link nav-link"><img class="user-ico" src="" alt="Профиль пользователя"></a>';  
                         }
+                    }
                     ?>
                 </nav>
+           </div>
+        </div>
+    </header>
+    <main>
+        <section class="section search_section">
+            <div class="container search_container">
+                <h1>Удобный поиск авиабилетов</h1>
+                <form action="" class="search_form">
+                    <div class="search_box">
+                        <label class="form-label"><input type="text" list="destanations" class="form-input" placeholder="Откуда"></label>
+                        <label class="form-label"><input type="text" list="destanations" class="form-input" placeholder="Куда"></label>
+                        <label class="form-label"><input type="date" class="form-input" placeholder="Когда"></label>
+                        <label class="form-label"><input type="date" class="form-input" placeholder="Обратно"></label>
+                    </div>
+                    <input class="form-butn" type="submit" value="Найти">
+                    <datalist id="destanations">
+                        <option value="Chrome">
+                    </datalist>
+                </form>
             </div>
-        </header>
-
-        <main>
-            <section class="hero">
-                <h2>Удобный поиск авиабилетов</h2>
-                <button class="search-button">Поиск билетов</button>
-                <div class="search-filters">
-                    <input type="text" placeholder="Откуда...">
-                    <input type="text" placeholder="Куда...">
-                    <input type="text" placeholder="Когда...">
-                    <input type="text" placeholder="Обратно...">
+        </section>
+        <section class="section destinations_section">
+            <div class="container destinations_container">
+                <h2>Популярные направления</h2>
+                <div class="destinations_box">
+                    <?
+                    ?>
+                    <div class="destination-card">
+                        <div class="destination-shadow"></div>
+                        <div class="destination-info">
+                            <h3 class="destination-title">Mumbai</h3>
+                            <p class="destination-text">В Mumbai и обратно</p>
+                            <p class="destination-price">1500р</p>
+                            <button class="destination-btn">Подробнее</button>
+                        </div>
+                        <img src="img/non-favorite.svg" alt="" class="destination-favorite">
+                    </div>
+                    <div class="destination-card">
+                        <div class="destination-shadow"></div>
+                        <div class="destination-info">
+                            <h3 class="destination-title">Mumbai</h3>
+                            <p class="destination-text">В Mumbai и обратно</p>
+                            <p class="destination-price">1500р</p>
+                            <button class="destination-btn">Подробнее</button>
+                        </div>
+                        <img src="img/non-favorite.svg" alt="" class="destination-favorite">
+                    </div>
+                    <div class="destination-card">
+                        <div class="destination-shadow"></div>
+                        <div class="destination-info">
+                            <h3 class="destination-title">Mumbai</h3>
+                            <p class="destination-text">В Mumbai и обратно</p>
+                            <p class="destination-price">1500р</p>
+                            <button class="destination-btn">Подробнее</button>
+                        </div>
+                        <img src="img/non-favorite.svg" alt="" class="destination-favorite">
+                    </div>
+                    <div class="destination-card">
+                        <div class="destination-shadow"></div>
+                        <div class="destination-info">
+                            <h3 class="destination-title">Mumbai</h3>
+                            <p class="destination-text">В Mumbai и обратно</p>
+                            <p class="destination-price">1500р</p>
+                            <button class="destination-btn">Подробнее</button>
+                        </div>
+                        <img src="img/non-favorite.svg" alt="" class="destination-favorite">
+                    </div>
+                    <div class="destination-card">
+                        <div class="destination-shadow"></div>
+                        <div class="destination-info">
+                            <h3 class="destination-title">Mumbai</h3>
+                            <p class="destination-text">В Mumbai и обратно</p>
+                            <p class="destination-price">1500р</p>
+                            <button class="destination-btn">Подробнее</button>
+                        </div>
+                        <img src="img/non-favorite.svg" alt="" class="destination-favorite">
+                    </div>
+                    <div class="destination-card">
+                        <div class="destination-shadow"></div>
+                        <div class="destination-info">
+                            <h3 class="destination-title">Mumbai</h3>
+                            <p class="destination-text">В Mumbai и обратно</p>
+                            <p class="destination-price">1500р</p>
+                            <button class="destination-btn">Подробнее</button>
+                        </div>
+                        <img src="img/non-favorite.svg" alt="" class="destination-favorite">
+                    </div>
                 </div>
-            </section>
-
-            <section class="popular-routes">
-                <h2>Популярные рейсы</h2>
-                <div class="routes-grid">
-                    <div class="route-card">
-                        <img src="img/mumbai.png" alt="Mumbai - Delhi">
-                        <div class="route-info">
-                            <h3>Mumbai - Delhi</h3>
-                            <p>Из Mumbai в обратно от 1500 ₽</p>
-                            <button class="details-button">Подробнее</button>
-                        </div>
-                    </div>
-                    <div class="route-card">
-                        <img src="img/delhi.png" alt="Bangalore - Chennai">
-                        <div class="route-info">
-                            <h3>Bangalore - Chennai</h3>
-                            <p>Из Bangalore в обратно от 1500 ₽</p>
-                            <button class="details-button">Подробнее</button>
-                        </div>
-                    </div>
-                    <div class="route-card">
-                        <img src="img/hyderad.png" alt="Hyderabad - Delhi">
-                        <div class="route-info">
-                            <h3>Hyderabad - Delhi</h3>
-                            <p>Из Hyderabad в обратно от 1500 ₽</p>
-                            <button class="details-button">Подробнее</button>
-                        </div>
-                    </div>
-                    <div class="route-card">
-                        <img src="img/kolkata.png" alt="Kolkata - Bangalore">
-                        <div class="route-info">
-                            <h3>Kolkata - Bangalore</h3>
-                            <p>Из Kolkata в обратно от 1500 ₽</p>
-                            <button class="details-button">Подробнее</button>
-                        </div>
-                    </div>
-                    <div class="route-card">
-                        <img src="img/delhi-chenhall.png" alt="Delhi - Chennai">
-                        <div class="route-info">
-                            <h3>Delhi - Chennai</h3>
-                            <p>Из Delhi в обратно от 1500 ₽</п>
-                            <button class="details-button">Подробнее</button>
-                        </div>
-                    </div>
-                    <div class="route-card">
-                        <img src="img/chenhall-mumbai.png" alt="Chennai - Mumbai">
-                        <div class="route-info">
-                            <h3>Chennai - Mumbai</h3>
-                            <p>Из Chennai в обратно от 1500 ₽</п>
-                            <button class="details-button">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="popular-places">
+            </div>
+        </section>
+        <section class="section places_section">
+            <div class="container places_container">
                 <h2>Популярные места</h2>
-                <div class="places-grid">
+                <div class="places_box">
                     <div class="place-card">
-                        <img src="img/img.png" alt="Mumbai">
+                        <img src="" alt="" class="place-img">
                         <div class="place-info">
-                            <h3>Mumbai</h3>
-                            <p>Самый западный, многонациональный и крупный город Индии</п>
-                            <button class="details-button">Подробнее</button>
+                            <h3 class="place-title">Шиваджи Парк</h3>
+                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
+                            <button class="place-btn">В избранное</button>
                         </div>
                     </div>
                     <div class="place-card">
-                        <img src="img/delhi3.png" alt="Delhi">
+                        <img src="" alt="" class="place-img">
                         <div class="place-info">
-                            <h3>Delhi</h3>
-                            <p>Столица Индии и второй по величине город страны</п>
-                            <button class="details-button">Подробнее</button>
+                            <h3 class="place-title">Шиваджи Парк</h3>
+                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
+                            <button class="place-btn">В избранное</button>
                         </div>
                     </div>
                     <div class="place-card">
-                        <img src="img/kolkata2.png" alt="Kolkata">
+                        <img src="" alt="" class="place-img">
                         <div class="place-info">
-                            <h3>Kolkata</h3>
-                            <п>Культурное сердце современной Индии</п>
-                            <button class="details-button">Подробнее</button>
+                            <h3 class="place-title">Шиваджи Парк</h3>
+                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
+                            <button class="place-btn">В избранное</button>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <section class="contacts">
-                <h2>Контакты</h2>
-                <p>+7 (800) 000-00-00</п>
-                <п>info@sitename.ru</п>
-            </section>
-        </main>
-
-        <footer>
-            <div class="footer-container">
-                <div class="footer-column">
-                    <h3>Сервис</h3>
-                    <ul>
-                        <li><a href="#">Оплата</a></ли>
-                        <ли><a href="#">Контакты</a></ли>
-                        <ли><a href="#">Реквизиты</a></ли>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Наши услуги</h3>
-                    <ul>
-                        <ли><a href="#">Заказ удобного рейса</а></ли>
-                        <ли><а href="#">Бронирование онлайн</а></ли>
-                        <ли><а href="#">Выбор маршрута</а></ли>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Контакты</h3>
-                    <п>+7 (800) 000-00-00<br>Консультации по телефону</п>
-                    <п>Электронная почта: info@sitename.ru</п>
+                    <div class="place-card">
+                        <img src="" alt="" class="place-img">
+                        <div class="place-info">
+                            <h3 class="place-title">Шиваджи Парк</h3>
+                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
+                            <button class="place-btn">В избранное</button>
+                        </div>
+                    </div>
+                    <div class="place-card">
+                        <img src="" alt="" class="place-img">
+                        <div class="place-info">
+                            <h3 class="place-title">Шиваджи Парк</h3>
+                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
+                            <button class="place-btn">В избранное</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </footer>
-    </div>
-    <script src="js/main.js"></script>
+        </section>
+    </main>
+    <footer>
+        <div class="section footer_section">
+            <div class="footer_contacts">
+                <h3 class="footer-title">Контакты</h3>
+                <a href="" class="link nav-link">
+                    +7 (800) 000-00-00
+                    <p class="footer-text">Консультации по телефону</p>
+                </a>
+                <a href="" class="link nav-link">
+                    infi@sitename.ru
+                    <p class="footer-text">Электронная почта</p>
+                </a>
+            </div>
+            <nav class="footer_nav">
+                <a href="" class="link nav-link">Оплата</a>
+                <a href="" class="link nav-link">Контакты</a>
+                <a href="" class="link nav-link">Реквезиты</a>
+                <a href="" class="link nav-link">Заказ удобного рейса</a>
+                <a href="" class="link nav-link">Бронирование онлайн</a>
+                <a href="" class="link nav-link">Выбор маршрута</a>
+            </nav>
+        </div>
+    </footer>
 </body>
 </html>
