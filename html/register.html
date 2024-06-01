@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход в личный кабинет - DT Airlines</title>
+    <title>Регистрация личного кабинета - DT Airlines</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -13,26 +13,32 @@
                 <h1>DT Airlines</h1>
                 <nav>
                     <a href="/index.html">главная</a>
-                    <a href="#" class="sign-up-button">Sign Up</a>
+                    <a href="./login.html" class="sign-up-button">Sign Up</a>
                 </nav>
             </div>
         </header>
 
         <main>
-            <div class="login-container">
-                <h2>Вход в личный кабинет</h2>
+            <div class="registration-container">
+                <h2>Регистрация личного кабинета</h2>
                 <form action="#" method="POST">
                     <div class="form-group">
-                        <label for="login">Введите ваш телефон, логин или e-mail</label>
-                        <input type="text" id="login" name="login" placeholder="Телефон/e-mail/логин" required>
+                        <input type="text" id="phone" name="phone" placeholder="📞 Ваш номер телефона" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Введите пароль</label>
-                        <input type="password" id="password" name="password" placeholder="Пароль" required>
+                        <input type="text" id="login" name="login" placeholder="👤 Ваш логин" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="✉️ Ваша почта" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" placeholder="🔒 Пароль" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password-confirm" name="password-confirm" placeholder="🔒 Введите ещё раз пароль" required>
                     </div>
                     <div class="form-actions">
-                        <button type="submit" class="login-button">Войти</button>
-                        <button type="button" class="register-button"><a href="./register.html" class="regist-btn">Зарегистрироваться</a></button>
+                        <button type="submit" class="register-button">Зарегистрироваться</button>
                     </div>
                 </form>
             </div>
@@ -64,6 +70,5 @@
             </div>
         </footer>
     </div>
-    <script src="scripts.js"></script>
 </body>
 </html>
