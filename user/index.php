@@ -1,6 +1,5 @@
 <?
 include_once "../handlers/db.php";
-var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -42,131 +41,29 @@ var_dump($_SESSION);
         </div>
     </header>
     <main>
-        <section class="section search_section">
-            <div class="container search_container">
-                <h1>Удобный поиск авиабилетов</h1>
-                <form action="" class="search_form">
-                    <div class="search_box">
-                        <label class="form-label"><input type="text" list="destanations" class="form-input" placeholder="Откуда"></label>
-                        <label class="form-label"><input type="text" list="destanations" class="form-input" placeholder="Куда"></label>
-                        <label class="form-label"><input type="date" class="form-input" placeholder="Когда"></label>
-                        <label class="form-label"><input type="date" class="form-input" placeholder="Обратно"></label>
+        <section class="section user_section">
+            <div class="container user_container">
+                <h1>Личный кабинет</h1>
+                <form action="" class="user_form">
+                    <div class="user_data">
+                        <label for="" class="user-line">
+                            <input type="text" name="username" value="username" placeholder="Ваше имя">
+                        </label>
+                        <label for="" class="user-line">
+                            <p class="user-text">Старый пароль</p>
+                            <input type="password" name="password">
+                        </label>
+                        <label for="" class="user-line">
+                            <p class="user-text">Новый пароль</p>
+                            <input type="password" name="newpassword">
+                        </label>
                     </div>
-                    <input class="form-butn" type="submit" value="Найти">
-                    <datalist id="destanations">
-                        <option value="Chrome">
-                    </datalist>
+                    <div class="user_photo">
+                        <img src="" alt="" class="user-pic">
+                        <input type="file">
+                        <input class="user-btn" type="submit" value="Обновить">
+                    </div>
                 </form>
-            </div>
-        </section>
-        <section class="section destinations_section">
-            <div class="container destinations_container">
-                <h2>Популярные направления</h2>
-                <div class="destinations_box">
-                    <?
-                    $query = $con->prepare("SELECT * FROM favorite_locations");
-                    $query->execute();
-                    $data = $query->fetchAll();
-                    $favorites = [];
-                    foreach ($data as $row) {
-                        $favorites[$row['destination_id']] = $row['favorites'];
-                    }
-                    arsort($favorites);
-                    $topDestinations = array_slice(array_keys($favorites), 0, 3, true);
-
-                    $placeholders = implode(',', array_fill(0, count($topDestinations), '?'));
-                    $query = $con->prepare("SELECT * FROM destinations WHERE id IN ($placeholders)");
-                    $query->execute($topDestinations);
-                    $topDestinationsInfo = $query->fetchAll();
-                    foreach ($topDestinationsInfo as $destination) {
-                        echo '<div class="destination-card" style="background-image:url('.$destination["img"].')">
-                        <div class="destination-shadow"></div>
-                        <div class="destination-info">
-                            <h3 class="destination-title">'.$destination["title"].'</h3>
-                            <p class="destination-text">В '.$destination["title"].' и обратно</p>
-                            <p class="destination-price">от '.$destination["price"].'р</p>
-                            <button class="destination-btn">Подробнее</button>
-                        </div>
-                        <img src="img/non-favorite.svg" alt="" class="destination-favorite">
-                    </div>';
-                    }
-                    ?>
-                </div>
-            </div>
-        </section>
-        <section class="section places_section">
-            <div class="container places_container">
-                <h2>Популярные места</h2>
-                <div class="places_box">
-                    <?
-                    $query = $con->prepare("SELECT * FROM favorite_locations");
-                    $query->execute();
-                    $data = $query->fetchAll();
-                    $favorites = [];
-                    foreach ($data as $row) {
-                        $favorites[$row['destination_id']] = $row['favorites'];
-                    }
-                    arsort($favorites);
-                    $topDestinations = array_slice(array_keys($favorites), 0, 3, true);
-
-                    $placeholders = implode(',', array_fill(0, count($topDestinations), '?'));
-                    $query = $con->prepare("SELECT * FROM destinations WHERE id IN ($placeholders)");
-                    $query->execute($topDestinations);
-                    $topDestinationsInfo = $query->fetchAll();
-                    foreach ($topDestinationsInfo as $destination) {
-                        echo '<div class="destination-card" style="background-image:url('.$destination["img"].')">
-                        <div class="destination-shadow"></div>
-                        <div class="destination-info">
-                            <h3 class="destination-title">'.$destination["title"].'</h3>
-                            <p class="destination-text">В '.$destination["title"].' и обратно</p>
-                            <p class="destination-price">от '.$destination["price"].'р</p>
-                            <button class="destination-btn">Подробнее</button>
-                        </div>
-                        <img src="img/non-favorite.svg" alt="" class="destination-favorite">
-                    </div>';
-                    }
-                    ?>
-                    <div class="place-card">
-                        <img src="img/destinations/hyderad.png" alt="" class="place-img">
-                        <div class="place-info">
-                            <h3 class="place-title">Шиваджи Парк</h3>
-                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
-                            <button class="place-btn">В избранное</button>
-                        </div>
-                    </div>
-                    <div class="place-card">
-                        <img src="" alt="" class="place-img">
-                        <div class="place-info">
-                            <h3 class="place-title">Шиваджи Парк</h3>
-                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
-                            <button class="place-btn">В избранное</button>
-                        </div>
-                    </div>
-                    <div class="place-card">
-                        <img src="" alt="" class="place-img">
-                        <div class="place-info">
-                            <h3 class="place-title">Шиваджи Парк</h3>
-                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
-                            <button class="place-btn">В избранное</button>
-                        </div>
-                    </div>
-                    <div class="place-card">
-                        <img src="" alt="" class="place-img">
-                        <div class="place-info">
-                            <h3 class="place-title">Шиваджи Парк</h3>
-                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
-                            <button class="place-btn">В избранное</button>
-                        </div>
-                    </div>
-                    <div class="place-card">
-                        <img src="" alt="" class="place-img">
-                        <div class="place-info">
-                            <h3 class="place-title">Шиваджи Парк</h3>
-                            <p class="place-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum esse quo delectus. Reprehenderit exercitationem officiis blanditiis necessitatibus sit. Accusamus sapiente tempore eum, quam fugiat doloribus. Asperiores fugiat illo beatae reiciendis!</p>
-                            <button class="place-btn">В избранное</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     </main>
