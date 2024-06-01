@@ -227,7 +227,7 @@ h2 {
     border-bottom: none;
 }
 
-.details-btn, .remove-favorite-btn {
+.details-btn{
     background-color: black;
     color: white;
     padding: 0.75rem 1.5rem;
@@ -245,9 +245,6 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 1.5rem;
-}
-.remove-favorite-btn{
-    
 }
 
 footer {
