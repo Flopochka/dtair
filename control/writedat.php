@@ -81,6 +81,6 @@ $data = [getFlightData($businessFilePath), getFlightData($economyFilePath)];
 
 $serializedData = serialize($data);
 file_put_contents('data.txt', $serializedData);
-header("Location:/control");
+header("Location:/");
 exit;
 ?>

@@ -67,6 +67,6 @@ for ($i = 0; $i < 50000; $i++) {
     generateSQL($data[1], 2, $con);
 }
 
-header("Location:/control");
+header("Location:/");
 exit;
 ?>
