@@ -67,7 +67,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
                         <img src="<?php echo '../'.$data['profile_pic']; ?>" alt="" class="user-pic">
                         <label class="input-file">
                             <input type="file" name="file" accept="image/*" class="user-img">		
-                            <span class="user-span">Загрузить фото</span>
+                            <span class="user-span" id="addPhoto">Загрузить фото</span>
                         </label>
                     </div>
                     </div>
