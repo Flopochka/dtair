@@ -95,4 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     } catch (error) {console.log(error)}
+    var lazyloadImages = document.querySelectorAll(".lazy-load");
+    lazyloadImages.forEach(function(img) {
+        img.style.backgroundImage = "url(" + img.getAttribute("data-bg") + ")";
+    });
 });
