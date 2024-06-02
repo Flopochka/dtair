@@ -95,7 +95,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     } catch (error) {console.log(error)}
+<<<<<<< HEAD
 });
 
 //замена аватарки
 
+=======
+    var lazyloadImages = document.querySelectorAll(".lazy-load");
+    lazyloadImages.forEach(function(img) {
+        img.style.backgroundImage = "url(" + img.getAttribute("data-bg") + ")";
+    });
+});
+>>>>>>> 5401a14cca30f9b8b0b7cc52ef7c654768202218

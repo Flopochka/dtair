@@ -8,3 +8,8 @@ AddCharset UTF-8 .html
    Header unset ETag
 </FilesMatch>
 Header set X-Content-Type-Options nosniff
+<IfModule mod_headers.c>
+    <FilesMatch "\.(jpg|jpeg|png|gif|ico|svg)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+</IfModule>
