@@ -46,27 +46,32 @@ include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
             <div class="container user_container">
                 <h1>Личный кабинет</h1>
                 <form action="../handlers/userupdate.php" class="user_form" method="POST" enctype="multipart/form-data">
+                    <div class="flex">
                     <div class="user_data">
+                        <p class="user-text">Адрес электронной почты</p>
                         <label for="" class="user-line">
-                            <input type="text" name="username" value="<? echo $data['username']; ?>" placeholder="Ваше имя">
+                            <input class = "input-user" type="email" name="username" value="<? echo $data['username']; ?>" placeholder="Ваше имя">
+                
                         </label>
                         <label for="" class="user-line">
-                            <p class="user-text">Старый пароль</p>
-                            <input type="password" name="password">
+                            <p class="user-text">Фамилия и имя</p>
+                            <input type="text" name="password" class="input-user">
                         </label>
                         <label for="" class="user-line">
-                            <p class="user-text">Новый пароль</p>
-                            <input type="password" name="newpassword">
+                            <p class="user-text">Номер телефона</p>
+                            <input type="phone" name="newpassword" class="input-user">
                         </label>
+                        <button class="delete-btn">Удалить личный кабинет</button>
                     </div>
                     <div class="user_photo">
                         <img src="<?php echo '../'.$data['profile_pic']; ?>" alt="" class="user-pic">
                         <label class="input-file">
-                            <input type="file" name="file" accept="image/*">		
-                            <span>Выберите фото</span>
+                            <input type="file" name="file" accept="image/*" class="user-img">		
+                            <span class="user-span">Загрузить фото</span>
                         </label>
-                        <input class="user-btn" type="submit" value="Обновить">
                     </div>
+                    </div>
+                    
                 </form>
             </div>
         </section>
