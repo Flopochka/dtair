@@ -8,10 +8,7 @@
 </head>
 <body>
     <div class="box">
-        <a href="generateflights.php">Сгенерировать 100000 тикетов</a>
         <a href="cleardb.php">Очистить бд</a>
-        <a href="restartdb.php">Пересоздать бд</a>
-        <a href="writedat.php">Перезаписать dat</a>
     </div>
     <style>
         *{

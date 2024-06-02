@@ -20,7 +20,7 @@ include_once "../handlers/db.php";
                 <nav class="header_nav">
                     <?php
                     if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
-                        echo '<a href="login/" class="link nav-link">Войти</a>
+                        echo '<a href="/" class="link nav-link">Войти</a>
                         <a href="../singup/" class="link nav-btn">Зарегестироватся</a>';
                     } else{
                         $query = $con->prepare("SELECT * FROM users WHERE login = ?");

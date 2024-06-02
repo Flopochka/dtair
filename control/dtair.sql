@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 01 2024 г., 22:27
+-- Время создания: Июн 02 2024 г., 14:02
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -39,12 +39,12 @@ CREATE TABLE `destinations` (
 --
 
 INSERT INTO `destinations` (`id`, `title`, `img`, `price`) VALUES
-(1, 'Mumbai', 'img/destinations/mumbai.png', 1500),
-(2, 'Bangalore', 'img/destinations/bangalore.png', 1700),
-(3, 'Chennai', 'img/destinations/chennai.png', 1560),
-(4, 'Kolkata', 'img/destinations/kolkata.png', 1670),
-(5, 'Delhi', 'img/destinations/delhi.png', 1100),
-(6, 'Hyderabad', 'img/destinations/hyderad.png', 1234);
+(1, 'Mumbai', 'img/destinations/mumbai.jpg', 1500),
+(2, 'Bangalore', 'img/destinations/bangalore.jpg', 1700),
+(3, 'Chennai', 'img/destinations/chennai.jpg', 1560),
+(4, 'Kolkata', 'img/destinations/kolkata.jpg', 1670),
+(5, 'Delhi', 'img/destinations/delhi.jpg', 1100),
+(6, 'Hyderabad', 'img/destinations/hyderad.jpg', 1234);
 
 -- --------------------------------------------------------
 
@@ -65,7 +65,9 @@ CREATE TABLE `favorite_locations` (
 INSERT INTO `favorite_locations` (`id`, `user_id`, `destination_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
-(3, 1, 3);
+(3, 1, 3),
+(4, 2, 1),
+(5, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -101,29 +103,9 @@ INSERT INTO `favorite_places` (`id`, `place_id`, `user_id`) VALUES
 (15, 23, 1),
 (16, 26, 1),
 (17, 27, 1),
-(18, 28, 1);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `flights`
---
-
-CREATE TABLE `flights` (
-  `id` int NOT NULL,
-  `date` date DEFAULT NULL,
-  `airline` varchar(100) DEFAULT NULL,
-  `ch_code` varchar(10) DEFAULT NULL,
-  `num_code` int DEFAULT NULL,
-  `dep_time` time DEFAULT NULL,
-  `departure_destination` int DEFAULT NULL,
-  `time_taken` varchar(20) DEFAULT NULL,
-  `stop` varchar(20) DEFAULT NULL,
-  `arr_time` time DEFAULT NULL,
-  `arrival_destination` int DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
-  `Type` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+(18, 28, 1),
+(19, 11, 2),
+(20, 12, 2);
 
 -- --------------------------------------------------------
 
@@ -164,11 +146,11 @@ INSERT INTO `places` (`id`, `destination_id`, `title`, `subtitle`, `img`) VALUES
 (6, 2, 'Парк Куббон', 'Один из самых больших парков в городе.', 'img/places/Парк Куббон.jpg'),
 (7, 2, 'Лалбаг Крепость', 'Историческая крепость, построенная в 16 веке.', 'img/places/Лалбаг Крепость.jpg'),
 (8, 2, 'Виджая Лаксми', 'Знаменитый храм Виджая Лаксми в Бангалоре.', 'img/places/Виджая Лаксми.jpg'),
-(9, 2, 'Башня Бангалора', 'Высокое здание с панорамным видом на город.', 'img/places/Башня Бангалора.jpg!d'),
+(9, 2, 'Башня Бангалора', 'Высокое здание с панорамным видом на город.', 'img/places/Башня Бангалора.jpg'),
 (10, 2, 'Фольклорный музей Карнатаки', 'Музей, демонстрирующий традиционные культурные артефакты.', 'img/places/Фольклорный музей Карнатаки.jpg'),
 (11, 3, 'Парк Марина', 'Один из самых больших пляжей в мире.', 'img/places/Парк Марина.jpg'),
 (12, 3, 'Красная Крепость', 'Историческая крепость, стратегически важное сооружение.', 'img/places/Красная Крепость.jpg'),
-(13, 3, 'Храм Капалишвар', 'Древний храм, посвященный богу Шиве.', 'img/places/Храм Капалишвар.jpeg'),
+(13, 3, 'Храм Капалишвар', 'Древний храм, посвященный богу Шиве.', 'img/places/Храм Капалишвар.jpg'),
 (14, 3, 'Галерея Шудха', 'Искусство и культура в одном месте.', 'img/places/Галерея Шудха.jpg'),
 (15, 3, 'Национальный парк Гандхи', 'Заповедник, который является домом для различных видов флоры и фауны.', 'img/places/Национальный парк Гандхи.jpg'),
 (16, 4, 'Парк Экоспера', 'Популярный парк для отдыха и релаксации.', 'img/places/Парк Экоспера.jpg'),
@@ -185,7 +167,7 @@ INSERT INTO `places` (`id`, `destination_id`, `title`, `subtitle`, `img`) VALUES
 (27, 6, 'Рамоуд', 'Дворец и здание правительства.', 'img/places/Рамоуд.jpg'),
 (28, 6, 'Сторожевой Дом', 'Здание, ранее использовавшееся для военного наблюдения.', 'img/places/Сторожевой Дом.jpg'),
 (29, 6, 'Будда-Статуя', 'Огромная статуя Будды в историческом парке.', 'img/places/Будда-Статуя.jpg'),
-(30, 6, 'Рамоуд', 'Красивый дворец, открытый для посещения.', 'img/places/Рамоуд.jpeg');
+(30, 6, 'Рамоуд', 'Красивый дворец, открытый для посещения.', 'img/places/Рамоуд.jpg');
 
 -- --------------------------------------------------------
 
@@ -208,7 +190,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `password`, `reg_date`, `last_seens`, `profile_pic`, `username`) VALUES
-(1, 'liker', '', '2024-06-01 08:53:08', '2024-06-01 11:53:08', NULL, NULL);
+(1, 'liker', '', '2024-06-01 08:53:08', '2024-06-01 11:53:08', NULL, NULL),
+(2, 'fff', '$2y$10$9IKWjmBS.mm.IjNVnaBNyuVIZj9YfXImhvJqbwqKPp68/XagMDP/G', '2024-06-02 09:38:20', '2024-06-02 12:38:23', 'img/profile/nopicture.jpg', 'fff');
 
 --
 -- Индексы сохранённых таблиц
@@ -232,12 +215,6 @@ ALTER TABLE `favorite_locations`
 -- Индексы таблицы `favorite_places`
 --
 ALTER TABLE `favorite_places`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `flights`
---
-ALTER TABLE `flights`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -272,19 +249,13 @@ ALTER TABLE `destinations`
 -- AUTO_INCREMENT для таблицы `favorite_locations`
 --
 ALTER TABLE `favorite_locations`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `favorite_places`
 --
 ALTER TABLE `favorite_places`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT для таблицы `flights`
---
-ALTER TABLE `flights`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT для таблицы `history`
@@ -302,7 +273,7 @@ ALTER TABLE `places`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
