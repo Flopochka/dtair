@@ -1,4 +1,4 @@
-<?
+<?php
 include_once "../handlers/db.php";
 $stmt = $con->query("SHOW TABLES");
 $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -11,3 +11,4 @@ session_start();
 session_destroy();
 header("Location:/control");
 exit;
+?>

@@ -1,4 +1,4 @@
-<?
+<?php
 $con = new PDO("mysql:host=127.0.0.1;dbname=dtair", "root", "");
 session_start();
 if (isset($_SESSION['rand'])) {
@@ -10,3 +10,4 @@ function validate_input($text) {
     return htmlspecialchars(trim($text));
 }
 session_write_close();
+?>

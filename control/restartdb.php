@@ -1,4 +1,4 @@
-<?
+<?php
 include_once "../handlers/db.php";
 $stmt = $con->query("SHOW TABLES");
 $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);

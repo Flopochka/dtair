@@ -1,4 +1,4 @@
-<?
+<?php
 include_once "handlers/db.php";
 if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
     echo '<div class="popup">'.$_SESSION['popup'].'<div class="popup-close"></div></div>';
@@ -25,7 +25,7 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
                     <img class="logo" src="img/plane.svg" alt="Логотип">
                 </a>
                 <nav class="header_nav">
-                    <?
+                    <?php
                     if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
                         echo '<a href="login/" class="link nav-link">Войти</a>
                         <a href="singup/" class="link nav-btn">Зарегестироватся</a>';
@@ -61,7 +61,7 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
                     </div>
                     <input class="form-butn" type="submit" value="Найти">
                     <datalist id="destanations">
-                        <?
+                        <?php
                         $query = $con->prepare("SELECT * FROM destinations");
                         $query->execute();
                         $data = $query->fetchAll();
@@ -77,7 +77,7 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
             <div class="container destinations_container">
                 <h2>Популярные направления</h2>
                 <div class="destinations_box">
-                    <?
+                    <?php
                     if (!(isset($_SESSION['login']) && isset($_SESSION['password']))) {
                         $query = $con->prepare("SELECT * FROM favorite_locations");
                         $query->execute();
@@ -165,7 +165,7 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
             <div class="container places_container">
                 <h2>Популярные места</h2>
                 <div class="places_box">
-                <?
+                <?php
                     if (!(isset($_SESSION['login']) && isset($_SESSION['password']))) {
                         $destination = (int)$_GET['destination'];
                         if ($destination == null) {
