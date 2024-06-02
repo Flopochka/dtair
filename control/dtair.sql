@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 02 2024 г., 13:57
+-- Время создания: Июн 02 2024 г., 14:02
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -39,12 +39,12 @@ CREATE TABLE `destinations` (
 --
 
 INSERT INTO `destinations` (`id`, `title`, `img`, `price`) VALUES
-(1, 'Mumbai', 'img/destinations/mumbai.png', 1500),
-(2, 'Bangalore', 'img/destinations/bangalore.png', 1700),
-(3, 'Chennai', 'img/destinations/chennai.png', 1560),
-(4, 'Kolkata', 'img/destinations/kolkata.png', 1670),
-(5, 'Delhi', 'img/destinations/delhi.png', 1100),
-(6, 'Hyderabad', 'img/destinations/hyderad.png', 1234);
+(1, 'Mumbai', 'img/destinations/mumbai.jpg', 1500),
+(2, 'Bangalore', 'img/destinations/bangalore.jpg', 1700),
+(3, 'Chennai', 'img/destinations/chennai.jpg', 1560),
+(4, 'Kolkata', 'img/destinations/kolkata.jpg', 1670),
+(5, 'Delhi', 'img/destinations/delhi.jpg', 1100),
+(6, 'Hyderabad', 'img/destinations/hyderad.jpg', 1234);
 
 -- --------------------------------------------------------
 
