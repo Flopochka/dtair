@@ -1,4 +1,4 @@
-<?
+<?php
 include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
 ?>
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
                     <img class="logo" src="../img/plane.svg" alt="Логотип">
                 </a>
                 <nav class="header_nav">
-                    <?
+                    <?php
                     if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
                         echo '<a href="..login/" class="link nav-link">Войти</a>
                         <a href="..singup/" class="link nav-btn">Зарегестироватся</a>';
@@ -60,7 +60,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
                         </label>
                     </div>
                     <div class="user_photo">
-                        <img src="<? echo '../'.$data['profile_pic']; ?>" alt="" class="user-pic">
+                        <img src="<?php echo '../'.$data['profile_pic']; ?>" alt="" class="user-pic">
                         <label class="input-file">
                             <input type="file" name="file" accept="image/*">		
                             <span>Выберите фото</span>

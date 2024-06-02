@@ -1,4 +1,4 @@
-<?
+<?php
 include_once "../handlers/db.php";
 ?>
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ include_once "../handlers/db.php";
                     <img class="logo" src="../img/plane.svg" alt="Логотип">
                 </a>
                 <nav class="header_nav">
-                    <?
+                    <?php
                     if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
                         echo '<a href="login/" class="link nav-link">Войти</a>
                         <a href="../singup/" class="link nav-btn">Зарегестироватся</a>';

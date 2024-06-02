@@ -1,4 +1,4 @@
-<?
+<?php
 include_once "db.php";
 if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
     $login = validate_input($_POST['login']);
@@ -24,3 +24,4 @@ if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
 }
 header("location: ../index.php");
 exit;
+?>

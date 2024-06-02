@@ -1,4 +1,4 @@
-<?
+<?php
 include_once "db.php";
 session_start();
 $login = validate_input($_POST['login']);
@@ -20,3 +20,4 @@ if (!(isset($_SESSION['login'])&&isset($_SESSION['password']))) {
 }
 header("location: ../");
 exit;
+?>

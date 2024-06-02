@@ -1,4 +1,4 @@
-<?
+<?php
 include_once "db.php";
 
 $typeFavorite = validate_input($_POST['type']);
@@ -62,3 +62,4 @@ if (!(isset($_SESSION['login']) && isset($_SESSION['password']))) {
 // Если выполнение дошло сюда, значит произошла ошибка или пользователь не авторизован
 echo "false";
 exit;
+?>
