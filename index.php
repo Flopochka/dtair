@@ -52,16 +52,23 @@ if (isset($_SESSION['popup'])&&$_SESSION['popup']!=null) {
         <section class="section search_section">
             <div class="container search_container">
                 <h1>Удобный поиск авиабилетов</h1>
-                <form action="" class="search_form">
+                <form action="search/" class="search_form" method="GET">
                     <div class="search_box">
-                        <label class="form-label"><input type="text" list="destanations" class="form-input" placeholder="Откуда"></label>
-                        <label class="form-label"><input type="text" list="destanations" class="form-input" placeholder="Куда"></label>
-                        <label class="form-label"><input type="date" class="form-input" placeholder="Когда"></label>
-                        <label class="form-label"><input type="date" class="form-input" placeholder="Обратно"></label>
+                        <label class="form-label"><input name="from_dest" type="text" list="destanations" class="form-input" placeholder="Откуда"></label>
+                        <label class="form-label"><input name="to_dest" type="text" list="destanations" class="form-input" placeholder="Куда"></label>
+                        <label class="form-label"><input name="from_date" type="date" class="form-input" placeholder="Когда"></label>
+                        <label class="form-label"><input name="to_date" type="date" class="form-input" placeholder="Обратно"></label>
                     </div>
                     <input class="form-butn" type="submit" value="Найти">
                     <datalist id="destanations">
-                        <option value="Chrome">
+                        <?
+                        $query = $con->prepare("SELECT * FROM destinations");
+                        $query->execute();
+                        $data = $query->fetchAll();
+                        foreach ($data as $opt) {
+                            echo '<option value="'.$opt['title'].'">';
+                        }
+                        ?>
                     </datalist>
                 </form>
             </div>

@@ -672,8 +672,11 @@ footer .nav-link:hover{
         -ms-flex-pack: center;
             justify-content: center;
 }
-.favorited{
-    color: orange;
+.favor_container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--space7);
 }
 @-webkit-keyframes pop {
     0%{

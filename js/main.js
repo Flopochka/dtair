@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const stylesheetLink = document.querySelector('link[rel="stylesheet"]');
+
+    // Получаем значение атрибута href
+    const hrefValue = stylesheetLink.getAttribute('href');
+
+    // Теперь убираем "css/style.css" и оставляем только путь к корню
+    const rootPath = hrefValue.replace('css/style.css', '');
     let popup = document.querySelector(".popup");
     if (popup) {
         popup.style.left = (window.innerWidth - popup.offsetWidth) / 2 + "px";
@@ -10,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         card.querySelector(".destination-favorite").addEventListener('click', function() {
             const hiddenData = card.querySelector('.hdndata').value;
 
-            fetch('handlers/favorite.php', {
+            fetch(rootPath+'/handlers/favorite.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -25,10 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 if (data.trim() === 'true') {
-                    if (card.querySelector(".destination-favorite").src.includes("non-favorite.svg")) {
-                        card.querySelector(".destination-favorite").src = "img/its-favorite.svg";
+                    const favoriteImg = card.querySelector(".destination-favorite").src;
+                    if (favoriteImg.includes("non-favorite.svg")) {
+                        card.querySelector(".destination-favorite").src = favoriteImg.replace("non-favorite.svg", "its-favorite.svg");
                     } else {
-                        card.querySelector(".destination-favorite").src = "img/non-favorite.svg";
+                        card.querySelector(".destination-favorite").src = favoriteImg.replace("its-favorite.svg", "non-favorite.svg");
                     }
                     card.querySelector(".destination-favorite").classList.toggle("favorited");
                     console.log("good",data);
@@ -48,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
         card.querySelector(".place-btn").addEventListener('click', function() {
             const hiddenData = card.querySelector('.hdndata').value;
 
-            fetch('handlers/favorite.php', {
+            fetch(rootPath+'/handlers/favorite.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

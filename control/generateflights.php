@@ -72,7 +72,6 @@ function combineRows($rows) {
 
 function getFlightData($filename) {
     $rows = file($filename);
-    $dataText = '';
     
     // начало корректного кода сепорации строк
     $rows = array_filter($rows, function($value){
@@ -109,27 +108,47 @@ function getFlightData($filename) {
         }
     }
 
-    $unique_stops = array_unique(array_column($data, 'stop'));
-    // Выводим уникальные значения в консоль
-    echo "<script>console.log(" . json_encode($unique_stops) . ");</script>";
-    return $data;
+    $unique_airlines = [[],[]];
+    $unique_stops = [];
+    foreach ($data as $flight) {
+        $airline = $flight['airline'];
+        $ch_code = $flight['ch_code'];
+        $stop = $flight['stop'];
+        
+        if (!in_array($airline, $unique_airlines[0])) {
+            $unique_airlines[0][] = $airline;
+            $unique_airlines[1][] = $ch_code;
+        }
+        
+        // Добавляем уникальные значения 'stop'
+        if (!in_array($stop, $unique_stops)) {
+            $unique_stops[][] = $stop;
+        }
+    }
+
+    return [$unique_airlines, $unique_stops];
 }
 
 
 
 function generateSQL($flight, $type) {
-    $date = getRandomDate('2024-07-01', '2024-08-31');
-    $airline = $flight['airline'];
-    $ch_code = $flight['ch_code'];
+    $current_date = new DateTime();
+    $current_date->modify('+1 year');
+    $date = getRandomDate(date('Y-m-d'), $current_date->format('Y-m-d'));
+    
+    $air = array_rand($flight[0][0]);
+    $airline = $flight[0][0][$air];
+    $ch_code = $flight[0][1][$air];
+
     $num_code = rand(100, 9999);
     $dep_time = getRandomTime();
+    $time_taken = getRandomTime();
     $departure_destination = rand(1, 6);
     $arrival_destination = rand(1, 6);
     while ($arrival_destination == $departure_destination) {
         $arrival_destination = rand(1, 6);
     }
-    $time_taken = str_replace(['h', 'm', ' '], [':', ':00', ''], $flight['time_taken']);
-    $stop = $flight['stop'];
+    $stop = $flight[1][array_rand($flight[1])];
     $arr_time = calculateArrivalTime($dep_time, $time_taken);
     $price = 0; // Будет рассчитано позже с помощью ИИ
     return "INSERT INTO `flights` (`id`, `date`, `airline`, `ch_code`, `num_code`, `dep_time`, `departure_destination`, `time_taken`, `stop`, `arr_time`, `arrival_destination`, `price`, `type`) VALUES (NULL, '$date', '$airline', '$ch_code', '$num_code', '$dep_time', '$departure_destination', '$time_taken', '$stop', '$arr_time', '$arrival_destination', '$price', '$type');";
@@ -145,11 +164,8 @@ $economy_flights = getFlightData($economyFilePath);
 $sql_queries = [];
 
 for ($i = 0; $i < 1000; $i++) {
-    $business_flight = $business_flights[array_rand($business_flights)];
-    $economy_flight = $economy_flights[array_rand($economy_flights)];
-    
-    $sql_queries[] = generateSQL($business_flight, 1);
-    $sql_queries[] = generateSQL($economy_flight, 2);
+    $sql_queries[] = generateSQL($business_flights, 1);
+    $sql_queries[] = generateSQL($economy_flights, 2);
 }
 
 // Записываем SQL запросы в файл
@@ -157,4 +173,6 @@ file_put_contents('flights.sql', implode("\n", $sql_queries));
 include_once "../handlers/db.php";
 $sql = file_get_contents("flights.sql");
 $con->exec($sql);
+header("Location:/control");
+exit;
 ?>

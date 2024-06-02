@@ -70,8 +70,8 @@ include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
                 </form>
             </div>
         </section>
-        <section class="section user_section">
-            <div class="container user_container">
+        <section class="section favor_section">
+            <div class="container favor_container">
                 <h1>Избранное</h1>
                 <?php
                 // Предполагается, что у вас уже установлено соединение с базой данных $con и идентификатор пользователя доступен в $_SESSION['user_id']
@@ -92,7 +92,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
                             <div class="place-info">
                                 <h3 class="place-title">'.$place['title'].'</h3>
                                 <p class="place-text">'.$place['subtitle'].'</p>
-                                <button class="place-btn">В избранное</button>
+                                <button class="place-btn">Избранное</button>
                                 <input type="text" hidden value="'.$place['id'].'" class="hdndata">
                             </div>
                         </div>';
@@ -115,7 +115,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
                                 <p class="destination-price">от '.$destination["price"].'р</p>
                                 <a href="?destination='.$destination["id"].'" class="destination-btn">Подробнее</a>
                             </div>
-                            <img src="../img/non-favorite.svg" alt="" class="destination-favorite">
+                            <img src="../img/its-favorite.svg" alt="" class="destination-favorite">
                             <input type="text" hidden value="'.$destination["id"].'" class="hdndata">
                         </div>';
                 }
@@ -147,5 +147,6 @@ include_once $_SERVER['DOCUMENT_ROOT']."/handlers/db.php";
             </nav>
         </div>
     </footer>
+    <script src="../js/main.js"></script>
 </body>
 </html>
