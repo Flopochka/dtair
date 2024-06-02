@@ -13,3 +13,4 @@ include_once "generateflights.php";
 sleep(10);
 header("Location:/control");
 exit;
+?>

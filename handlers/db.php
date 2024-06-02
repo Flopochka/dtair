@@ -1,5 +1,5 @@
 <?
-$con = new PDO("mysql:host=localhost;dbname=dtair", "root", "");
+$con = new PDO("mysql:host=127.0.0.1;dbname=dtair", "root", "");
 session_start();
 if (isset($_SESSION['rand'])) {
     unset($_SESSION['rand']);
